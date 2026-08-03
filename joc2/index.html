@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Troba les emocions</title>
+    <link rel="stylesheet" href="../gameStyle.css">
+</head>
+
+<body>
+
+    <div class="game-wrapper">
+        <div id="phaseHeader" class="phase-header">
+            <span id="gameTitle">Troba les emocions</span>
+            <div class="right-group">
+                <span id="headerTitle">Relacionar emojis i paraules</span>
+                <span id="sectionBadge" class="section-badge">Secció 1 / 3</span>
+            </div>
+        </div>
+
+        <div class="main-container">
+
+            <div class="sidebar">
+                <h3>Progrés</h3>
+                <div id="progressContainer" class="progress-container">
+                    <div class="circle" id="c1">1</div>
+                    <div class="circle" id="c2">2</div>
+                    <div class="circle" id="c3">3</div>
+                    <div class="circle" id="c4">4</div>
+                    <div class="circle" id="c5">5</div>
+                    <div class="circle" id="c6">6</div>
+                    <div class="circle" id="c7">7</div>
+                    <div class="circle" id="c8">8</div>
+                    <div class="circle" id="c9">9</div>
+                    <div class="circle" id="c10">10</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <div class="score-badge">
+                        <span id="score">0</span>&nbsp;<span id="scoreLabel">Punts</span>
+                    </div>
+                    <h2 id="question"></h2>
+                </div>
+
+                <div id="gameArea" class="game-area">
+                    <div id="targetZone" class="target-zone"></div>
+                    <div id="options" class="options"></div>
+                </div>
+
+                <div id="msg"></div>
+
+                <div class="exit-container">
+                    <button id="actionBtn" class="btn-action" style="display:none;"></button>
+                    <button class="btn-exit" onclick="showExitModal()">Acabar partida</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="exitModal" class="modal-overlay">
+        <div class="modal-box">
+            <h1>Alerta!</h1>
+            <h2>Estàs segur que vols acabar la partida actual i tornar al menú?</h2>
+            <div class="modal-buttons">
+                <button class="btn-modal confirm" onclick="redirectToMenu()">Sí, vull sortir</button>
+                <button class="btn-modal cancel" onclick="hideExitModal()">Cancel·lar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dades.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
