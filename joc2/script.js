@@ -76,15 +76,14 @@ function resetProgressBar() {
 }
 
 function buildEndingHtml(op) {
-    const color = op.correct ? "#2e7d32" : "#c62828";
+    const emoji = op.correct ? "🎉" : "😥";
     const label = op.correct ? "Molt bé!" : "Desenllaç";
 
     return `
-        <div style="font-size:16px;font-weight:bold;color:${color};margin-bottom:8px;text-transform:uppercase;">
-            ${label}
-        </div>
-        <div style="font-size:19px;color:#333;">
-            ${op.desenllac}
+        <div class="end-box">
+            <div class="emoji">${emoji}</div>
+            <div class="character-name">${label}</div>
+            <p class="dialogue-text">${op.desenllac}</p>
         </div>`;
 }
 
