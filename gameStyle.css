@@ -649,7 +649,6 @@ h2 {
 
 .dialogue-text {
     font-size: 22px;
-    font-family: impact, sans-serif;
     color: #333;
     margin: 0;
 }
@@ -728,4 +727,55 @@ h2 {
     color: #666;
     font-size: 14px;
     margin-top: 15px;
+}
+/* ========================= */
+/* CORRECCIÓ: evitar que el contingut es talli en fer zoom */
+/* La zona central de joc fa scroll intern si no hi cap tot, */
+/* així els botons de sota (com "Acabar partida") sempre es veuen */
+/* ========================= */
+
+.game-area {
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* ========================= */
+/* JOC 3 - DISTRIBUCIÓ HORITZONTAL (personatge + conversa en columnes) */
+/* ========================= */
+
+.conversation-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
+.conversation-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    flex-shrink: 0;
+    padding-top: 10px;
+}
+
+.conversation-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    overflow-y: auto;
+    padding: 2px;
+}
+
+.conversation-main .dialogue-box,
+.conversation-main .duo-sentence-hint {
+    width: 100%;
+    box-sizing: border-box;
 }
