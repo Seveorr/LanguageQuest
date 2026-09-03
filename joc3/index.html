@@ -27,7 +27,9 @@
             </div>
 
             <div class="card">
-                <h2 id="sceneTitle"></h2>
+                <div class="scene-header" id="sceneHeader">
+                    <span class="scene-chip">🎬&nbsp;<span id="sceneTitle"></span></span>
+                </div>
 
                 <div id="gameArea" class="game-area">
                     <div class="conversation-layout">
@@ -41,17 +43,19 @@
 
                         <div class="conversation-main">
 
-                            <div id="tipBox" class="duo-sentence-hint" style="display:none;"></div>
-
-                            <div class="dialogue-box target-zone" id="dialogueBox">
+                            <div class="speech-bubble target-zone" id="dialogueBox">
                                 <p class="dialogue-text" id="npcText"></p>
                             </div>
 
-                            <button class="speak-btn" id="speakBtn">🔊 Repetir àudio</button>
+                            <div id="tipBox" class="tip-box" style="display:none;"></div>
 
-                            <div id="optionsArea" style="width:100%;">
-                                <p class="prompt">TU DIUS:</p>
-                                <div class="options" id="options"></div>
+                            <div class="bubble-footer">
+                                <div class="bubble-footer-left">
+                                    <button class="speak-btn" id="speakBtn">🔊 Repetir àudio</button>
+                                </div>
+                                <div class="bubble-footer-right" id="optionsArea">
+                                    <div class="options-column" id="options"></div>
+                                </div>
                             </div>
 
                             <div id="msg"></div>

@@ -23,7 +23,7 @@
 const scenes = {
 
     cafeteria: {
-        title: "ESCENA · LA CAFETERIA",
+        title: "La cafeteria",
         tree: {
             start: {
                 npc: "Bon dia! Què li poso?",
@@ -86,7 +86,7 @@ const scenes = {
     },
 
     calle: {
-        title: "ESCENA · DEMANAR INDICACIONS",
+        title: "Demanar indicacions",
         tree: {
             start: {
                 npc: "Hola! Et puc ajudar en alguna cosa?",
@@ -140,7 +140,7 @@ const scenes = {
     },
 
     tienda: {
-        title: "ESCENA · DE COMPRES",
+        title: "De compres",
         tree: {
             start: {
                 npc: "Hola! Benvingut a la botiga, busques alguna cosa en especial?",
@@ -200,7 +200,7 @@ const scenes = {
     },
 
     presentacion: {
-        title: "ESCENA · PRESENTAR-SE",
+        title: "Presentar-se",
         tree: {
             start: {
                 npc: "Hola! Sóc Marta, encantada. Com et dius?",
@@ -254,7 +254,7 @@ const scenes = {
     },
 
     consulta: {
-        title: "ESCENA · ANAR AL METGE",
+        title: "Anar al metge",
         tree: {
             start: {
                 npc: "Bon dia, passa i seu. Què et porta per aquí avui?",

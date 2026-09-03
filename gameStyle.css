@@ -737,6 +737,12 @@ h2 {
 .game-area {
     min-height: 0;
     overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.game-area::-webkit-scrollbar {
+    display: none;
 }
 
 /* ========================= */
@@ -771,11 +777,183 @@ h2 {
     align-items: center;
     gap: 10px;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 2px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
-.conversation-main .dialogue-box,
-.conversation-main .duo-sentence-hint {
+.conversation-main::-webkit-scrollbar {
+    display: none;
+}
+
+.conversation-main > * {
     width: 100%;
     box-sizing: border-box;
+}
+
+/* ------- Píndola del títol de l'escena ------- */
+
+.scene-header {
+    text-align: right;
+    margin-bottom: 4px;
+}
+
+.scene-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    color: white;
+    padding: 8px 22px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+/* ------- Bafarada de diàleg ------- */
+
+.speech-bubble {
+    position: relative;
+    display: block;
+    width: calc(100% - 20px);
+    background: #f9fbfd;
+    border: 3px solid #2196F3;
+    border-radius: 20px;
+    padding: 20px 26px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.speech-bubble::before {
+    content: "";
+    position: absolute;
+    left: -19px;
+    top: 26px;
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 19px solid #2196F3;
+}
+
+.speech-bubble::after {
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: 26px;
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 16px solid #f9fbfd;
+}
+
+.speech-bubble .dialogue-text {
+    text-align: left;
+    margin: 0;
+    font-size: 19px;
+    line-height: 1.55;
+    color: #20324a;
+    font-weight: 600;
+    letter-spacing: 0.1px;
+}
+
+.speech-bubble.correct-bg::before { border-right-color: #4caf50; }
+.speech-bubble.correct-bg::after { border-right-color: #c8e6c9; }
+.speech-bubble.wrong-bg::before { border-right-color: #f44336; }
+.speech-bubble.wrong-bg::after { border-right-color: #ffcdd2; }
+
+/* ------- Requadre de consells ------- */
+
+.tip-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: #FFF8E1;
+    border: 1px solid #FFD54F;
+    border-left: 5px solid #FFA000;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    color: #7a5b00;
+    text-align: left;
+    line-height: 1.4;
+}
+
+/* ------- Peu de la bafarada: àudio (esq.) + respostes (dreta) ------- */
+
+.bubble-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.bubble-footer-left {
+    flex-shrink: 0;
+}
+
+.bubble-footer-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.options-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    width: 100%;
+}
+
+.options-column .option-btn {
+    max-width: 92%;
+    text-align: left;
+}
+
+/* ------- Requadre de feedback (final del diàleg) ------- */
+
+.feedback-box {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 14px;
+    padding: 14px 18px;
+    text-align: center;
+    animation: pop 0.35s ease;
+}
+
+.feedback-box.success {
+    background: #E8F5E9;
+    border: 2px solid #4CAF50;
+}
+
+.feedback-box.fail {
+    background: #FFEBEE;
+    border: 2px solid #F44336;
+}
+
+.feedback-box .feedback-title {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.feedback-box.success .feedback-title {
+    color: #2e7d32;
+}
+
+.feedback-box.fail .feedback-title {
+    color: #c62828;
+}
+
+.feedback-box .feedback-text {
+    font-size: 14.5px;
+    color: #444;
+    line-height: 1.45;
 }

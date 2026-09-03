@@ -6,6 +6,8 @@ let successCount = 0;
 const progressContainer = document.getElementById("progressContainer");
 const sectionBadge = document.getElementById("sectionBadge");
 const sceneTitle = document.getElementById("sceneTitle");
+const sceneHeader = document.getElementById("sceneHeader");
+const bubbleFooter = document.querySelector(".bubble-footer");
 const avatarEl = document.getElementById("avatar");
 const characterNameEl = document.getElementById("characterName");
 const tipBox = document.getElementById("tipBox");
@@ -157,11 +159,9 @@ function renderNode(nodeId) {
         if (ok) successCount++;
 
         msg.innerHTML = `
-            <div style="font-size:18px;font-weight:bold;color:${ok ? '#2e7d32' : '#c62828'};margin-top:8px;">
-                ${node.end.title}
-            </div>
-            <div style="font-size:15px;color:#555;margin-top:4px;">
-                ${node.end.text}
+            <div class="feedback-box ${ok ? 'success' : 'fail'}">
+                <div class="feedback-title">${node.end.emoji} ${node.end.title}</div>
+                <div class="feedback-text">${node.end.text}</div>
             </div>`;
 
         if ('speechSynthesis' in window) {
@@ -173,7 +173,7 @@ function renderNode(nodeId) {
         setTimeout(() => {
             dialogueBox.classList.remove("correct-bg", "wrong-bg");
             advanceScene();
-        }, 2600);
+        }, 4200);
 
         return;
     }
@@ -241,13 +241,12 @@ function showFinalScreen() {
     document.querySelector(".sidebar").style.display = "none";
     document.querySelector(".main-container").style.justifyContent = "center";
 
-    sceneTitle.innerHTML = '<span class="final-message">🎉 Enhorabona! Has completat totes les converses.</span>';
+    sceneHeader.innerHTML = '<span class="final-message">🎉 Enhorabona! Has completat totes les converses.</span>';
 
     document.querySelector(".character").style.display = "none";
     tipBox.style.display = "none";
     dialogueBox.style.display = "none";
-    speakBtn.style.display = "none";
-    optionsArea.style.display = "none";
+    if (bubbleFooter) bubbleFooter.style.display = "none";
 
     msg.innerHTML = `
         <div style="font-size:20px;margin:20px 0;">
