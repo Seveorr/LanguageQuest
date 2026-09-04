@@ -1,7 +1,9 @@
 let score = 0;
+let correctCount = 0;
 let currentSection = 1;
 let questionInSectionIdx = 1;
 const maxQuestionsPerSection = 10;
+const totalQuestions = maxQuestionsPerSection * 3;
 let correctAnswersOrder = [];
 
 function shuffle(a) { return [...a].sort(() => Math.random() - 0.5); }
@@ -40,7 +42,7 @@ const actionBtn = document.getElementById("actionBtn");
 
 function showExitModal() { modal.classList.add("active"); }
 function hideExitModal() { modal.classList.remove("active"); }
-function redirectToMenu() { window.location.href = "../menu.html"; }
+function redirectToMenu() { window.location.href = "../menu/index.html"; }
 
 function updateProgressCircle(isCorrect) {
     const circle = document.getElementById(`c${questionInSectionIdx}`);
@@ -197,18 +199,16 @@ function next() {
             document.querySelector('.sidebar').style.display = "none";
             document.querySelector('.main-container').style.justifyContent = "center";
 
-            question.innerHTML =
-                '<span class="final-message">🎉 Enhorabona! Has completat totes les seccions.</span>';
+            document.getElementById("topInfo").style.display = "none";
+            gameArea.style.display = "none";
+            msg.style.display = "none";
+            document.getElementById("exitContainer").style.display = "none";
 
-            targetZone.innerHTML = "Partida finalitzada. Gràcies per jugar!";
-            options.innerHTML = "";
-            duoHint.style.display = "none";
-            actionBtn.style.display = "none";
-
-            msg.innerHTML =
-                `<div style="font-size:24px;margin:20px 0;">
-                    Puntuació final: <strong>${score} ${score === 1 ? 'punt' : 'punts'}</strong>
-                 </div>`;
+            showFinalScreen(
+                "🎉 Enhorabona! Has completat totes les seccions.",
+                correctCount,
+                totalQuestions
+            );
 
             return;
         }
@@ -399,6 +399,7 @@ function resolveRound(ok) {
     if (ok) {
 
         score += 1;
+        correctCount++;
 
         const badge = document.querySelector('.score-badge');
 
@@ -493,6 +494,26 @@ function resolveRound(ok) {
 
         }, 1000);
     }
+}
+
+function showFinalScreen(message, correct, total) {
+
+    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+    let pctClass = "low";
+    if (pct >= 70) pctClass = "good";
+    else if (pct >= 40) pctClass = "mid";
+
+    const finalScreen = document.getElementById("finalScreen");
+
+    finalScreen.innerHTML = `
+        <div class="final-message">${message}</div>
+        <div class="final-percentage ${pctClass}">${pct}%</div>
+        <div class="final-fraction">${correct}/${total} encerts</div>
+        <button class="btn-action" onclick="redirectToMenu()">Tornar al menú</button>
+    `;
+
+    finalScreen.style.display = "flex";
 }
 
 initDragAndDrop();

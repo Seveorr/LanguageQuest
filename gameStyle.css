@@ -95,6 +95,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
+    position: relative;
 }
 
 h1 {
@@ -866,21 +867,70 @@ h2 {
 .speech-bubble.wrong-bg::before { border-right-color: #f44336; }
 .speech-bubble.wrong-bg::after { border-right-color: #ffcdd2; }
 
-/* ------- Requadre de consells ------- */
+/* ------- Requadre comú per a consells i feedback ------- */
 
-.tip-box {
+.notice-box {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 14px;
+    padding: 12px 16px;
+    text-align: left;
+    animation: pop 0.35s ease;
+}
+
+.notice-box .notice-icon {
+    font-size: 22px;
+    line-height: 1.2;
+    flex-shrink: 0;
+}
+
+.notice-box .notice-body {
+    flex: 1;
+}
+
+.notice-box .notice-title {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 3px;
+}
+
+.notice-box .notice-text {
+    font-size: 14px;
+    line-height: 1.45;
+    color: #444;
+}
+
+.notice-box.tip {
     background: #FFF8E1;
     border: 1px solid #FFD54F;
     border-left: 5px solid #FFA000;
-    border-radius: 10px;
-    padding: 10px 14px;
-    font-size: 13.5px;
-    color: #7a5b00;
-    text-align: left;
-    line-height: 1.4;
+}
+
+.notice-box.tip .notice-title {
+    color: #8a6400;
+}
+
+.notice-box.success {
+    background: #E8F5E9;
+    border: 1px solid #A5D6A7;
+    border-left: 5px solid #4CAF50;
+}
+
+.notice-box.success .notice-title {
+    color: #2e7d32;
+}
+
+.notice-box.fail {
+    background: #FFEBEE;
+    border: 1px solid #EF9A9A;
+    border-left: 5px solid #F44336;
+}
+
+.notice-box.fail .notice-title {
+    color: #c62828;
 }
 
 /* ------- Peu de la bafarada: àudio (esq.) + respostes (dreta) ------- */
@@ -917,43 +967,61 @@ h2 {
     text-align: left;
 }
 
-/* ------- Requadre de feedback (final del diàleg) ------- */
+/* ========================= */
+/* PANTALLA FINAL (comuna als tres jocs) */
+/* ========================= */
 
-.feedback-box {
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 14px;
-    padding: 14px 18px;
+.final-screen {
+    display: none;
+    position: absolute;
+    inset: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
     text-align: center;
-    animation: pop 0.35s ease;
+    padding: 20px;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 12px;
 }
 
-.feedback-box.success {
-    background: #E8F5E9;
-    border: 2px solid #4CAF50;
+.final-message {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1565C0;
+    line-height: 1.35;
+    max-width: 440px;
+    text-shadow: 0 2px 6px rgba(21, 101, 192, 0.15);
+    animation: trophy 0.8s ease;
 }
 
-.feedback-box.fail {
-    background: #FFEBEE;
-    border: 2px solid #F44336;
+.final-percentage {
+    font-size: 68px;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: trophy 0.8s ease;
 }
 
-.feedback-box .feedback-title {
-    font-size: 17px;
+.final-percentage.mid {
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.final-percentage.low {
+    background: linear-gradient(135deg, #F44336, #C62828);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.final-fraction {
+    font-size: 15px;
+    color: #666;
     font-weight: bold;
-    margin-bottom: 4px;
-}
-
-.feedback-box.success .feedback-title {
-    color: #2e7d32;
-}
-
-.feedback-box.fail .feedback-title {
-    color: #c62828;
-}
-
-.feedback-box .feedback-text {
-    font-size: 14.5px;
-    color: #444;
-    line-height: 1.45;
+    letter-spacing: 0.3px;
 }

@@ -1,5 +1,19 @@
+function shuffle(arr) {
+    return [...arr].sort(() => Math.random() - 0.5);
+}
+
+const NUM_DIALEGS = 5;
+
+// Tria NUM_DIALEGS escenes aleatòries (sense repetir) de totes les disponibles a "scenes"
+function pickRandomScenes(count) {
+    const allKeys = Object.keys(scenes);
+    return shuffle(allKeys).slice(0, count);
+}
+
+const playOrder = pickRandomScenes(NUM_DIALEGS);
+
 let currentIndex = 0;
-let currentScene = sceneOrder[0];
+let currentScene = playOrder[0];
 let successCount = 0;
 
 // Elements del DOM
@@ -22,7 +36,7 @@ const modal = document.getElementById("exitModal");
 
 function showExitModal() { modal.classList.add("active"); }
 function hideExitModal() { modal.classList.remove("active"); }
-function redirectToMenu() { window.location.href = "../menu.html"; }
+function redirectToMenu() { window.location.href = "../menu/index.html"; }
 
 // ============================================
 // LATERAL DE PROGRÉS (cercles numerats, no interactius)
@@ -31,7 +45,7 @@ function redirectToMenu() { window.location.href = "../menu.html"; }
 function buildProgressCircles() {
     progressContainer.innerHTML = "";
 
-    sceneOrder.forEach((_, i) => {
+    playOrder.forEach((_, i) => {
         const circle = document.createElement("div");
         circle.className = "circle";
         circle.id = `c${i + 1}`;
@@ -139,8 +153,14 @@ function renderNode(nodeId) {
     characterNameEl.textContent = node.character;
 
     if (node.tip) {
-        tipBox.textContent = node.tip;
-        tipBox.style.display = "block";
+        const tipText = node.tip.replace(/^💡\s*/, "");
+        tipBox.innerHTML = `
+            <span class="notice-icon">💡</span>
+            <div class="notice-body">
+                <div class="notice-title">Consell</div>
+                <div class="notice-text">${tipText}</div>
+            </div>`;
+        tipBox.style.display = "flex";
     } else {
         tipBox.style.display = "none";
     }
@@ -159,9 +179,12 @@ function renderNode(nodeId) {
         if (ok) successCount++;
 
         msg.innerHTML = `
-            <div class="feedback-box ${ok ? 'success' : 'fail'}">
-                <div class="feedback-title">${node.end.emoji} ${node.end.title}</div>
-                <div class="feedback-text">${node.end.text}</div>
+            <div class="notice-box ${ok ? 'success' : 'fail'}">
+                <span class="notice-icon">${node.end.emoji}</span>
+                <div class="notice-body">
+                    <div class="notice-title">${node.end.title}</div>
+                    <div class="notice-text">${node.end.text}</div>
+                </div>
             </div>`;
 
         if ('speechSynthesis' in window) {
@@ -181,7 +204,7 @@ function renderNode(nodeId) {
     optionsArea.style.display = "block";
 
     optionsEl.innerHTML = "";
-    node.options.forEach(opt => {
+    shuffle(node.options).forEach(opt => {
         const btn = document.createElement("button");
         btn.className = "option-btn";
         btn.textContent = "“" + opt.text + "”";
@@ -214,14 +237,14 @@ function chooseOption(btn, opt) {
 
 function loadScene(index) {
     currentIndex = index;
-    currentScene = sceneOrder[index];
+    currentScene = playOrder[index];
 
     sceneTitle.style.animation = "none";
     void sceneTitle.offsetWidth;
     sceneTitle.style.animation = "pop 0.4s ease";
 
     sceneTitle.textContent = scenes[currentScene].title;
-    sectionBadge.textContent = `Diàleg ${index + 1} / ${sceneOrder.length}`;
+    sectionBadge.textContent = `Diàleg ${index + 1} / ${playOrder.length}`;
 
     renderNode("start");
 }
@@ -229,7 +252,7 @@ function loadScene(index) {
 function advanceScene() {
     const next = currentIndex + 1;
 
-    if (next >= sceneOrder.length) {
+    if (next >= playOrder.length) {
         showFinalScreen();
     } else {
         loadScene(next);
@@ -241,17 +264,31 @@ function showFinalScreen() {
     document.querySelector(".sidebar").style.display = "none";
     document.querySelector(".main-container").style.justifyContent = "center";
 
-    sceneHeader.innerHTML = '<span class="final-message">🎉 Enhorabona! Has completat totes les converses.</span>';
-
+    sceneHeader.style.display = "none";
     document.querySelector(".character").style.display = "none";
     tipBox.style.display = "none";
     dialogueBox.style.display = "none";
     if (bubbleFooter) bubbleFooter.style.display = "none";
+    msg.style.display = "none";
+    document.getElementById("exitContainer").style.display = "none";
 
-    msg.innerHTML = `
-        <div style="font-size:20px;margin:20px 0;">
-            Diàlegs completats amb èxit: <strong>${successCount} / ${sceneOrder.length}</strong>
-        </div>`;
+    const total = playOrder.length;
+    const pct = total > 0 ? Math.round((successCount / total) * 100) : 0;
+
+    let pctClass = "low";
+    if (pct >= 70) pctClass = "good";
+    else if (pct >= 40) pctClass = "mid";
+
+    const finalScreen = document.getElementById("finalScreen");
+
+    finalScreen.innerHTML = `
+        <div class="final-message">🎉 Enhorabona! Has completat totes les converses.</div>
+        <div class="final-percentage ${pctClass}">${pct}%</div>
+        <div class="final-fraction">${successCount}/${total} encerts</div>
+        <button class="btn-action" onclick="redirectToMenu()">Tornar al menú</button>
+    `;
+
+    finalScreen.style.display = "flex";
 }
 
 buildProgressCircles();

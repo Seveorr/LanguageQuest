@@ -85,6 +85,78 @@ const scenes = {
         }
     },
 
+    tren: {
+        title: "Bitllet de tren",
+        tree: {
+            start: {
+                npc: "Bona tarda! Em podria donar el seu bitllet, si us plau?",
+                character: "REVISOR", avatar: "🤵",
+                options: [
+                    { text: "Sí, aquí el té.", correct: true, next: "validació" },
+                    { text: "Ok.", correct: true, next: "informal" },
+                    { text: "No tinc bitllet.", correct: true, next: "comprar" }
+                ]
+            },
+            validació: {
+                npc: "Ui, el seu bitllet està caducat. N'ha de comprar un de nou.",
+                character: "REVISOR", avatar: "🤵",
+                options: [
+                    { text: "D'acord, voldria un bitllet senzill.", correct: true, next: "pagar" },
+                    { text: "No vull comprar cap bitllet.", correct: false, next: "fail_enfadat" }
+                ]
+            },
+            informal: {
+                npc: "Vaja! El seu bitllet està caducat. N'haurà de comprar un de nou.",
+                character: "REVISOR", avatar: "🤵",
+                tip: "💡 Sona més educat fer frases completes, en comptes de respostes curtes.",
+                options: [
+                    { text: "D'acord, voldria un bitllet senzill.", correct: true, next: "pagar" },
+                    { text: "No vull comprar cap bitllet.", correct: false, next: "fail_enfadat" }
+                ]
+            },
+            comprar: {
+                npc: "Perfecte, li puc vendre un bitllet senzill o recarregr-li una tarjeta T-Mobilitat. Què prefereix?",
+                character: "REVISOR", avatar: "🤵",
+                options: [
+                    { text: "D'acord, vull un bitllet senzill, si us plau.", correct: true, next: "pagar" },
+                    { text: "No vull comprar cap bitllet!", correct: false, next: "fail_enfadat" },
+                    { text: "Vull recarregar la meva tarjeta T-Mobilitat.", correct: true, next: "pagar" }
+                ]
+            },
+            pagar: {
+                npc: "Aquí té. Són 2 euros amb 90 cèntims.",
+                character: "REVISOR", avatar: "🤵",
+                options: [
+                    { text: "Aquí té, moltes gràcies.", correct: true, next: "end_success" },
+                    { text: "Puc pagar amb targeta?", correct: true, next: "card" },
+                    { text: "No tinc diners.", correct: false, next: "fail_diners" }
+                ]
+            },
+            card: {
+                npc: "Per descomptat! Aquí té el datàfon.",
+                character: "REVISOR", avatar: "🤵",
+                options: [
+                    { text: "Gràcies, que tingui un bon dia.", correct: true, next: "end_success" }
+                ]
+            },
+            end_success: {
+                npc: "Moltes gracies! Que tingui un bon viatge!",
+                character: "REVISOR", avatar: "🤵",
+                end: { success: true, emoji: "🎫", title: "Conversa completada!", text: "Has comprat un bitllet amb èxit fent servir frases completes i educades. Molt bé!" }
+            },
+            fail_enfadat: {
+                npc: "Doncs baixi del tren a la propera parada i vagi a comprar un bitllet a la taquilla!!",
+                character: "REVISOR", avatar: "😡",
+                end: { success: false, emoji: "😕", title: "Diàleg no completat", text: "El revisor s'ha enfadat degut al teu comportament inadequat." }
+            },
+            fail_diners: {
+                npc: "Ah, llavors haurà de baixar del tren a la propera parada.",
+                character: "REVISOR", avatar: "🤵",
+                end: { success: false, emoji: "😅", title: "Diàleg no completat", text: "Sense poder pagar, no has pogut continuar el viatge." }
+            }
+        }
+    },
+
     calle: {
         title: "Demanar indicacions",
         tree: {
@@ -322,6 +394,3 @@ const scenes = {
         }
     }
 };
-
-// Ordre en què es juguen les escenes, una darrere l'altra
-const sceneOrder = ["cafeteria", "calle", "tienda", "presentacion", "consulta"];
