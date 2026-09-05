@@ -4,6 +4,10 @@
     --background: #f3f6fa;
     --text: #1f2937;
     --card: #ffffff;
+
+    --gold-light: #FFD54F;
+    --gold-dark: #FF8F00;
+    --gold-text: #5c3d00;
 }
 
 * { box-sizing: border-box; }
@@ -18,7 +22,7 @@ body {
     padding: 20px;
 }
 
-.container { width: 100%; max-width: 900px; }
+.container { width: 100%; max-width: 1200px; }
 
 header { text-align: center; margin-bottom: 40px; }
 
@@ -30,27 +34,38 @@ h1 { margin: 0; font-size: 3rem; color: var(--text); }
 
 .menu {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 25px;
 }
 
 .game-card {
     background: var(--card);
     border-radius: 24px;
-    padding: 30px;
+    padding: 24px 18px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, .12);
-    transition: .3s;
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
     text-decoration: none;
     color: inherit;
     border: 4px solid transparent;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    min-height: 230px;
 }
 
-.game-card:hover { transform: translateY(-6px); border-color: var(--primary); }
+.game-card:hover, .game-card:focus {
+    transform: translateY(-6px);
+    border-color: var(--primary);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, .16);
+}
 
-.game-icon { font-size: 4rem; margin-bottom: 15px; }
+.game-icon { font-size: 3.2rem; margin-bottom: 12px; }
 
-.game-title { font-size: 1.8rem; font-weight: bold; margin-bottom: 10px; }
+.game-title { font-size: 1.35rem; font-weight: bold; margin-bottom: 8px; }
+
+.game-description { font-size: 0.92rem; color: #4b5563; line-height: 1.4; }
 
 .play-button {
     margin-top: 20px;
@@ -60,13 +75,6 @@ h1 { margin: 0; font-size: 3rem; color: var(--text); }
     padding: 12px 24px;
     border-radius: 12px;
     font-weight: bold;
-}
-
-/* Modal d'Accessibilitat */
-.welcome-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(135deg, #dbeafe, #eff6ff);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
 
 .welcome-options { display: flex; gap: 40px; margin-top: 30px; }
@@ -136,10 +144,90 @@ h1 { margin: 0; font-size: 3rem; color: var(--text); }
     display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
 .welcome-content { max-width: 600px; text-align: center; }
-.welcome-options { display: flex; gap: 40px; margin-top: 30px; justify-content: center; }
 
 :focus {
     outline: 4px solid var(--primary);
     outline-offset: 4px;
     border-radius: 28px;
+}
+
+/* ============================================ */
+/* Botó "Real Life": mateixa amplada que .settings-full-btn */
+/* i mateixa alçada que una targeta de joc (.game-card)      */
+/* ============================================ */
+
+.reallife-btn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    min-height: 230px;
+    margin-top: 25px;
+    padding: 24px 40px;
+    text-align: left;
+    background: linear-gradient(180deg, var(--gold-light), var(--gold-dark));
+    color: #ffffff;
+    border: none;
+}
+
+.reallife-icon {
+    font-size: 4rem;
+    line-height: 1;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .2));
+}
+
+.reallife-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.reallife-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, .18);
+    letter-spacing: 0.5px;
+}
+
+.reallife-desc {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, .15);
+}
+
+.reallife-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(255, 143, 0, .35);
+}
+
+.reallife-btn:focus {
+    outline: 4px solid var(--gold-dark);
+    outline-offset: 4px;
+    box-shadow: 0 14px 32px rgba(255, 143, 0, .35);
+}
+
+/* En pantalles estretes, la graella s'adapta perquè les targetes
+   no quedin massa comprimides */
+@media (max-width: 900px) {
+    .menu {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .menu {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .reallife-btn {
+        flex-direction: column;
+        text-align: center;
+        min-height: 0;
+        padding: 24px;
+    }
 }

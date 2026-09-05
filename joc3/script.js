@@ -282,7 +282,7 @@ function showFinalScreen() {
     const finalScreen = document.getElementById("finalScreen");
 
     finalScreen.innerHTML = `
-        <div class="final-message">🎉 Enhorabona! Has completat totes les converses.</div>
+        <div class="final-message">Enhorabona! Has completat totes les converses.</div>
         <div class="final-percentage ${pctClass}">${pct}%</div>
         <div class="final-fraction">${successCount}/${total} encerts</div>
         <button class="btn-action" onclick="redirectToMenu()">Tornar al menú</button>

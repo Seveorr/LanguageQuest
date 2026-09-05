@@ -152,7 +152,7 @@ function next() {
             document.getElementById("exitContainer").style.display = "none";
 
             showFinalScreen(
-                "🎉 Enhorabona! Has completat totes les seccions.",
+                "Enhorabona! Has completat totes les seccions.",
                 correctCount,
                 totalQuestions
             );
