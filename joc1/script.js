@@ -1,4 +1,3 @@
-let score = 0;
 let correctCount = 0;
 let currentSection = 1;
 let questionInSectionIdx = 1;
@@ -21,13 +20,6 @@ function updateHeader() {
     } else {
         title.textContent = "Situacions i contexts diaris";
     }
-
-    scoreEl.textContent = score;
-
-    const scoreLabel = document.getElementById("scoreLabel");
-    if (scoreLabel) {
-        scoreLabel.textContent = (score === 1) ? "Punt" : "Punts";
-    }
 }
 
 const modal = document.getElementById("exitModal");
@@ -37,7 +29,6 @@ const targetZone = document.getElementById("targetZone");
 const duoHint = document.getElementById("duoHint");
 const options = document.getElementById("options");
 const msg = document.getElementById("msg");
-const scoreEl = document.getElementById("score");
 const actionBtn = document.getElementById("actionBtn");
 
 function showExitModal() { modal.classList.add("active"); }
@@ -398,16 +389,7 @@ function resolveRound(ok) {
 
     if (ok) {
 
-        score += 1;
         correctCount++;
-
-        const badge = document.querySelector('.score-badge');
-
-        if (badge) {
-            badge.classList.remove('bump');
-            void badge.offsetWidth;
-            badge.classList.add('bump');
-        }
 
         targetZone.classList.add('correct-bg');
 
@@ -422,8 +404,6 @@ function resolveRound(ok) {
         }, 1500);
 
     } else {
-
-        score = Math.max(0, score - 2);
 
         targetZone.classList.add('wrong-bg');
 
