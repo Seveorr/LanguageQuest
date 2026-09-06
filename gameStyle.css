@@ -1025,3 +1025,73 @@ h2 {
     font-weight: bold;
     letter-spacing: 0.3px;
 }
+
+/* ========================= */
+/* JOC 4 - TALKER (reconeixement de veu) */
+/* ========================= */
+
+.mic-btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 17px;
+    margin: 10px 0;
+    transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.mic-btn:hover:not(:disabled) {
+    background-color: #1976D2;
+    transform: translateY(-2px);
+}
+
+.mic-btn:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+}
+
+.mic-btn.listening {
+    background-color: #F44336;
+    animation: micPulse 1s ease-in-out infinite;
+}
+
+@keyframes micPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(244, 67, 54, .45);
+    }
+    50% {
+        box-shadow: 0 0 0 14px rgba(244, 67, 54, 0);
+    }
+}
+
+.talker-word {
+    font-size: 44px;
+    font-weight: 800;
+    color: #1565C0;
+    margin: 16px 0;
+    animation: pop 0.4s ease;
+}
+
+.talker-transcript {
+    font-size: 15px;
+    color: #666;
+    font-style: italic;
+    min-height: 22px;
+    margin-top: 6px;
+}
+
+.option-btn.chosen {
+    border-color: #2196F3;
+    background-color: #E3F2FD;
+    color: #1565C0;
+}
+
+.talker-say-area {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed #ccc;
+    width: 100%;
+}
