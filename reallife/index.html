@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Real Life · LanguageQuest</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+    <link rel="stylesheet" href="reallife.css">
+</head>
+
+<body>
+
+    <!-- Món 3D a pantalla completa -->
+    <canvas id="stage"></canvas>
+    <div id="vignette"></div>
+    <div id="bars"><div class="bar top"></div><div class="bar bottom"></div></div>
+
+    <!-- HUD petit: títol de la secció, progrés i botó de sortir -->
+    <div id="hud" class="hud hidden">
+        <div class="hud-title glass">
+            <span class="hud-logo">🎯</span>
+            <div><b>Real Life</b><small id="hudScenario"></small></div>
+        </div>
+        <div class="hud-progress glass">
+            <div class="hud-chapter" id="hudChapter"></div>
+            <div id="progress" class="progress"></div>
+            <div class="hud-meta"><span id="hudCount">0/0</span><span id="hudStreak" class="streak hidden">🔥 x2</span></div>
+        </div>
+    </div>
+    <div class="corner">
+        <button id="btnMute" class="glass-btn" title="So" aria-label="Activar o silenciar el so">🔊</button>
+        <button id="btnExit" class="glass-btn danger">✕ Sortir</button>
+    </div>
+
+    <!-- Etiqueta amb el nom del personatge (segueix el cap en 3D) -->
+    <div id="nameTag" class="nametag hidden"><b id="ntName"></b><small id="ntRole"></small></div>
+    <div id="praise" class="praise" aria-live="polite"></div>
+
+    <!-- Panell de prova (part inferior) -->
+    <div id="panel" class="panel glass" role="dialog" aria-live="polite">
+        <div class="panel-top">
+            <span id="pChip" class="chip"></span>
+            <span id="pSpeaker" class="speaker"></span>
+            <button id="pSpeak" class="icon-btn" title="Llegir en veu alta" aria-label="Llegir en veu alta">🔊</button>
+        </div>
+        <p id="pText" class="ptext"></p>
+        <div id="pBody" class="pbody"></div>
+        <div id="pFeedback" class="pfeedback hidden"></div>
+        <div class="pfoot"><button id="pNext" class="btn primary hidden">Continuar ▶</button></div>
+    </div>
+
+    <!-- Selecció d'escenari -->
+    <div id="screenMenu" class="screen menu hidden">
+        <button id="menuBack" class="glass-btn back">← Menú</button>
+        <div class="menu-inner">
+            <div class="logo">
+                <span class="logo-icon">🎯</span>
+                <h1>Real Life</h1>
+                <p>Viu situacions de la vida real, en 3D. Posa a prova tot el que has après.</p>
+            </div>
+            <div id="menuNotice" class="notice hidden"></div>
+            <div id="scList" class="sc-list"></div>
+            <p class="menu-foot">🎧 Millor amb auriculars · 🎤 Les proves de parla funcionen amb Google Chrome</p>
+        </div>
+    </div>
+
+    <!-- Targeta de capítol -->
+    <div id="chapterCard" class="chapter-card hidden">
+        <div class="cc-inner">
+            <div id="ccKicker" class="cc-kicker"></div>
+            <h2 id="ccTitle" class="cc-title"></h2>
+            <div id="ccSub" class="cc-sub"></div>
+            <p id="ccIntro" class="cc-intro"></p>
+        </div>
+    </div>
+
+    <!-- Resultats finals -->
+    <div id="screenEnd" class="screen end hidden">
+        <div class="end-card glass">
+            <div id="endScenario" class="end-scenario"></div>
+            <div id="endStars" class="end-stars"></div>
+            <div id="endPct" class="end-pct">0%</div>
+            <div id="endFrac" class="end-frac"></div>
+            <div id="endBadge" class="end-badge"></div>
+            <p id="endMsg" class="end-msg"></p>
+            <div id="endStreak" class="end-streak"></div>
+            <div id="endSkills" class="end-skills"></div>
+            <div class="end-actions">
+                <button id="btnReplay" class="btn ghost">↻ Repetir</button>
+                <button id="btnOthers" class="btn ghost">🗺️ Altres escenaris</button>
+                <button id="btnMenu" class="btn primary">Tornar al menú</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="fade"></div>
+
+    <div id="exitModal" class="modal">
+        <div class="modal-box glass">
+            <h3>Alerta!</h3>
+            <p>Estàs segur que vols acabar la partida actual i tornar al menú?</p>
+            <div class="modal-buttons">
+                <button id="btnExitYes" class="btn danger">Sí, vull sortir</button>
+                <button id="btnExitNo" class="btn ghost">Cancel·lar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" class="screen loading"><div class="spinner">🌍</div><p>Carregant el món...</p></div>
+
+    <div id="errorBox" class="screen hidden">
+        <div class="modal-box glass">
+            <h3>Ups!</h3>
+            <p id="errText"></p>
+            <div class="modal-buttons"><button id="errMenu" class="btn primary">Tornar al menú</button></div>
+        </div>
+    </div>
+
+    <!-- three.js r128 (motor 3D) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="data.js"></script>
+    <script src="audio.js"></script>
+    <script src="world.js"></script>
+    <script src="sets.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>
