@@ -53,6 +53,7 @@ const EMOTIONS = {
    voice: to de veu de la síntesi (pitch 0.5–2, rate 0.7–1.2)          */
 const CHARACTERS = {
     rosa: { name: 'Rosa', role: 'La veïna', skin: '#f0c6a0', hair: '#d4d4d4', hairStyle: 'bun', top: '#9b59b6', bottom: '#4f4a6a', accessory: 'glasses', height: 0.94, build: 1.08, sleeves: 'long', voice: { pitch: 1.25, rate: 0.92 } },
+    octavi: { name: 'Octavi', role: 'El veï', skin: '#f4d7c0', hair: '#000000', hairStyle: 'short', top: '#0cdc09', bottom: '#34495e', voice: { pitch: 0.9, rate: 1 } },
     pau: { name: 'Pau', role: 'Un vianant', skin: '#d9a37a', hair: '#2b1d14', hairStyle: 'short', top: '#e67e22', bottom: '#34495e', voice: { pitch: 0.9, rate: 1 } },
     pep: { name: 'Pep', role: 'El forner', skin: '#f3cfb3', hair: '#7a4a21', hairStyle: 'short', top: '#ffffff', bottom: '#6b7280', accessory: 'apron', height: 1.02, build: 1.2, voice: { pitch: 0.8, rate: 0.95 } },
     nuria: { name: 'Núria', role: 'Cambrera', skin: '#e8b894', hair: '#3b2417', hairStyle: 'ponytail', top: '#e74c3c', bottom: '#2d2d35', accessory: 'apron', apron: '#2d2d35', voice: { pitch: 1.3, rate: 1 } },
@@ -81,7 +82,7 @@ const Q = {
     }),
     build: (sentence, order, extras, prompt) => ({
         type: 'build', sentence, order, extras: extras || [],
-        prompt: prompt || 'Construeix aquesta frase amb pictogrames, en ordre:'
+        prompt: prompt || 'Construeix aquesta amb els pictogrames que creguis més adequats, en ordre:'
     }),
     emotion: (key, prompt) => ({
         type: 'emotion', emotion: key,
@@ -124,7 +125,7 @@ const SCENARIOS = [
                 beats: [
                     {
                         spot: 'neighbor', npc: 'rosa', questions: [
-                            Q.say('Bon dia! Que bonic que fa avui, oi?', 'Bon dia, Rosa! Sí, fa un dia preciós.', ['No et conec de res.', 'Ara no tinc temps per parlar.', 'Ahir va ploure molt.'], 'Saluda amb amabilitat i respon al que et diuen.'),
+                            Q.say('Bon dia! Quin dia tant bonic que fa avui, oi?', 'Bon dia, Rosa! Sí, fa un dia preciós.', ['No et conec de res.', 'Ara no tinc temps per parlar.', 'Ahir va ploure molt.'], 'Saluda amb amabilitat i respon al que et diuen.'),
                             Q.emotion('trist', 'La Rosa t\'explica que ha perdut el seu gat. Com es deu sentir?'),
                             Q.react('La Rosa està molt trista pel seu gat. Què fas?', [
                                 ['L\'abraço i m\'ofereixo a ajudar-la a buscar-lo.', true, 'La Rosa somriu una mica i t\'ho agraeix de tot cor.'],
@@ -132,6 +133,17 @@ const SCENARIOS = [
                                 ['Miro el mòbil sense dir res.', false, 'La Rosa sent que no l\'escoltes.']
                             ], 'Quan algú està trist, escolta\'l i ofereix-li ajuda.'),
                             Q.pic('🐱', 'gat', ['gos', 'ocell', 'peix'], 'La Rosa t\'ensenya una foto del seu animal. Quina paraula és?')
+                        ]
+                    },
+                    {
+                        spot: 'neighbor', npc: 'octavi', questions: [
+                            Q.say('Ei, quan de temps!', 'Quan de temps, Octavi! Quina alegria haver-te vist!', ['Ens hem vist abans?', 'Tinc molta pressa!', '*Fer com si no l\'haguessis vist*'], 'Saluda amablement al vell amic i intenta enrecordar-te d\'ell.'),
+                            Q.emotion('content', 'L\'Octavi t\'explica que se sent molt content d\'haver-te vist. Com es deu sentir?'),
+                            Q.say('Hauríem de quedar algun dia d\'aquests!', 'Es clar que sí, Octavi! Et va bé la setmana que vé?', ['Ostres, no em vé de gust.', 'No, gràcies.', 'T\'ho volia dir des de fa temps. Mai m\'has caigut bé, i t\'ho volia dir quan encara vivia a la ciutat. No ho vaig fer i vaig optar per venir a viure en aquest poble tranquil. Avui, en veure\'t a la llunyania, he intentat esquivar-te, però ha sigut inevitable.'], 'No diguis això a l\'Octavi, ja que li pots causar tristesa severa o inclús una depressió!'),
+                            Q.speak('Vols anar a pendre algo a la cafeteria dimarts vinent?', 'Proposa algo a fer a l\'Octavi, digues la següent frase en veu alta:'),
+                            Q.say('Perfecte, quedem per dimarts vinent!', 'Què t\'agradaria prendre?', ['Canvi de plans, no podré quedar d\'aquí a un mes vista!', 'D\'acord, però hi arribaré tard.', 'Ok.'], 'Respon de forma correcta al teu amic!'),
+                            Q.pic('☕', 'cafè', ['refresc', 'te', 'suc'], 'L\'Octavi t\'ensenya el que li agradaria prendre. Quina paraula és?'),
+                            Q.say('Pefecte, ens veiem dimarts!', 'Que vagi bé!', ['Adeu.', 'Ves-te\'n!', '*No dir res*'], 'Acomiada\'t amb educació i amabilitat del teu amic.')
                         ]
                     },
                     {

@@ -19,6 +19,10 @@
 
 * { box-sizing: border-box; }
 
+/* Sense barres d'scroll visibles (el contingut continua es pot desplaçar) */
+* { scrollbar-width: none; -ms-overflow-style: none; }
+*::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
 html, body {
     margin: 0; padding: 0; height: 100%; overflow: hidden;
     background: #0b1020; color: #fff;
@@ -137,7 +141,6 @@ html, body {
     width: min(900px, 94vw); max-height: 58vh; overflow-y: auto;
     padding: 16px 22px 18px;
     transform: translate(-50%, 130%); opacity: 0; transition: transform .45s cubic-bezier(.2, .9, .3, 1), opacity .3s;
-    scrollbar-width: thin;
 }
 .panel.show { transform: translate(-50%, 0); opacity: 1; }
 .panel-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
