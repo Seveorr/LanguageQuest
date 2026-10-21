@@ -4,8 +4,17 @@ const maxQuestionsPerSection = 10;
 const totalQuestions = maxQuestionsPerSection * 3;
 
 let sectionScores = [0, 0, 0];
-let currentDataIndex = 0;
 let currentItemData = null;
+let currentUtterance = null;
+
+// Gestió de llistes aleatòries sense repetició
+let shuffledDictats = [];
+let shuffledFrases = [];
+let shuffledSituacions = [];
+
+function shuffleArray(array) {
+    return [...array].sort(() => Math.random() - 0.5);
+}
 
 function updateHeader() {
     const badge = document.getElementById("sectionBadge");
@@ -28,7 +37,6 @@ const targetZone = document.getElementById("targetZone");
 const options = document.getElementById("options");
 const msg = document.getElementById("msg");
 const actionBtn = document.getElementById("actionBtn");
-const duoHint = document.getElementById("duoHint");
 
 function showExitModal() { modal.classList.add("active"); }
 function hideExitModal() { modal.classList.remove("active"); }
@@ -37,13 +45,8 @@ function redirectToMenu() { window.location.href = "../menu/index.html"; }
 function updateProgressCircle(isCorrect) {
     const circle = document.getElementById(`c${questionInSectionIdx}`);
     if (circle) {
-        if (isCorrect) {
-            circle.className = "circle correct";
-            circle.textContent = "✓";
-        } else {
-            circle.className = "circle incorrect";
-            circle.textContent = "X";
-        }
+        circle.className = isCorrect ? "circle correct" : "circle incorrect";
+        circle.textContent = isCorrect ? "✓" : "X";
     }
 }
 
@@ -84,7 +87,6 @@ function next() {
     msg.textContent = "";
     options.innerHTML = "";
     targetZone.innerHTML = "";
-    duoHint.style.display = "none";
     actionBtn.style.display = "none";
 
     updateHeader();
@@ -93,12 +95,11 @@ function next() {
     void question.offsetWidth;
     question.style.animation = "pop 0.4s ease";
 
-    let currentUtterance = null;
-
-    // Dins de next(), quan currentSection === 1:
     if (currentSection === 1) {
-        currentItemData = dictats[(questionInSectionIdx - 1) % dictats.length];
-        question.textContent = "Escolta l'àudio (es reprodueix automàticament) i escriu la frase:";
+        if (shuffledDictats.length === 0) shuffledDictats = shuffleArray(dictats);
+        currentItemData = shuffledDictats[(questionInSectionIdx - 1) % shuffledDictats.length];
+
+        question.textContent = "Escolta l'àudio i escriu la frase exacta:";
 
         const audioContainer = document.createElement("div");
         audioContainer.style.display = "flex";
@@ -113,30 +114,36 @@ function next() {
         playBtn.textContent = "🔊 Reproduir Àudio";
         playBtn.onclick = () => playDictationAudio(playBtn);
 
+        const inputWrapper = document.createElement("div");
+        inputWrapper.id = "dictationWrapper";
+        inputWrapper.style.width = "100%";
+
         const inputField = document.createElement("input");
         inputField.type = "text";
         inputField.id = "dictationInput";
         inputField.placeholder = "Escriu aquí el que sents...";
-        inputField.className = "writer-input"; // Utilitzem classe CSS dedicada
+        inputField.className = "writer-input";
 
+        inputWrapper.appendChild(inputField);
         audioContainer.appendChild(playBtn);
-        audioContainer.appendChild(inputField);
+        audioContainer.appendChild(inputWrapper);
         targetZone.appendChild(audioContainer);
 
         actionBtn.style.display = "inline-block";
         actionBtn.textContent = "Comprovar resposta";
         actionBtn.onclick = checkDictation;
 
-        // Retard d'1 segon per reproduir automàticament
         setTimeout(() => {
             playDictationAudio(playBtn);
         }, 1000);
+
     } else if (currentSection === 2) {
-        // Secció 2: Ordenar paraules
-        currentItemData = frasesOrdenar[(questionInSectionIdx - 1) % frasesOrdenar.length];
+        if (shuffledFrases.length === 0) shuffledFrases = shuffleArray(frasesOrdenar);
+        currentItemData = shuffledFrases[(questionInSectionIdx - 1) % shuffledFrases.length];
+
         question.textContent = "Ordena les paraules per construir una oració correcta:";
 
-        const scrambled = [...currentItemData.paraules].sort(() => Math.random() - 0.5);
+        const scrambled = shuffleArray(currentItemData.paraules);
 
         targetZone.style.minHeight = "70px";
         targetZone.style.display = "flex";
@@ -144,9 +151,9 @@ function next() {
         targetZone.style.gap = "8px";
         targetZone.style.alignItems = "center";
         targetZone.style.justifyContent = "center";
-        targetZone.innerHTML = `<span style="color:#888; font-style:italic;">Arrossega o clica les paraules aquí...</span>`;
+        targetZone.innerHTML = `<span style="color:#888; font-style:italic;">Clica les paraules per afegir-les...</span>`;
 
-        scrambled.forEach((p, idx) => {
+        scrambled.forEach((p) => {
             const wordEl = document.createElement("div");
             wordEl.className = "drag-item item-word";
             wordEl.textContent = p;
@@ -166,7 +173,8 @@ function next() {
         });
 
     } else if (currentSection === 3) {
-        currentItemData = situacionsRedaccio[(questionInSectionIdx - 1) % situacionsRedaccio.length];
+        if (shuffledSituacions.length === 0) shuffledSituacions = shuffleArray(situacionsRedaccio);
+        currentItemData = shuffledSituacions[(questionInSectionIdx - 1) % shuffledSituacions.length];
         
         question.innerHTML = `${currentItemData.icona} <strong>${currentItemData.titol}</strong><br><span style="font-size:15px; font-weight:normal; color:#555;">Respon a la situació utilitzant l'eina interactiva:</span>`;
 
@@ -265,81 +273,12 @@ function next() {
     }
 }
 
-function checkSentenceOrder() {
-    const items = Array.from(targetZone.querySelectorAll('.drag-item'));
-    const userOrder = items.map(el => el.textContent).join(" ");
-    const isOk = (userOrder === currentItemData.ordreCorrecte);
-
-    if (isOk) {
-        sectionScores[1]++;
-        msg.innerHTML = `<span style="color:#2e7d32; font-weight:bold;">Molt bé! Frase correcta.</span>`;
-    } else {
-        msg.innerHTML = `<span style="color:#d32f2f; font-weight:bold;">Incorrecte. L'ordre era: "${currentItemData.ordreCorrecte}"</span>`;
-    }
-
-    updateProgressCircle(isOk);
-    questionInSectionIdx++;
-    setTimeout(() => { next(); }, 2000);
-}
-
-function checkWriting() {
-    const textArea = document.getElementById("writingInput");
-    if (!textArea) return;
-
-    const text = textArea.value.trim().toLowerCase();
-    const words = text ? text.split(/\s+/) : [];
-
-    const hasMinWords = words.length >= currentItemData.minParaules;
-
-    // Comprovar quantes paraules clau conté el text
-    const matchedKeywords = currentItemData.keywords.filter(kw => text.includes(kw.toLowerCase()));
-    const hasEnoughKeywords = matchedKeywords.length >= 2; // Almenys 2 paraules clau relacionades
-
-    if (!hasMinWords) {
-        msg.innerHTML = `<span style="color:#d32f2f; font-weight:bold;">El text no arriba al mínim de ${currentItemData.minParaules} paraules (n'has escrit ${words.length}).</span>`;
-        updateProgressCircle(false);
-    } else if (!hasEnoughKeywords) {
-        msg.innerHTML = `<span style="color:#d32f2f; font-weight:bold;">El text no està relacionat amb la consigna. Inclou conceptes claus (ex: ${currentItemData.keywords.slice(0, 3).join(', ')}...).</span>`;
-        updateProgressCircle(false);
-    } else {
-        sectionScores[2]++;
-        msg.innerHTML = `<span style="color:#2e7d32; font-weight:bold;">Molt bé! Text coherent i amb l'extensió adequada.</span>`;
-        updateProgressCircle(true);
-    }
-
-    questionInSectionIdx++;
-    actionBtn.style.display = "none";
-    setTimeout(() => { next(); }, 3000);
-}
-
-function showFinalScreen(message, correct, total) {
-    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-
-    let pctClass = "low";
-    if (pct >= 70) pctClass = "good";
-    else if (pct >= 40) pctClass = "mid";
-
-    const finalScreen = document.getElementById("finalScreen");
-
-    finalScreen.innerHTML = `
-    <div class="final-message">${message}</div>
-    <div class="final-percentage ${pctClass}">${pct}%</div>
-    <div class="final-fraction">${correct}/${total} encerts totals</div>
-    <div style="margin: 10px 0; font-size: 15px; color: #444;">
-    <div>Secció 1 (Dictat): ${sectionScores[0]} / 10</div>
-    <div>Secció 2 (Ordenar): ${sectionScores[1]} / 10</div>
-    <div>Secció 3 (Redacció): ${sectionScores[2]} / 10</div>
-    </div>
-    <button class="btn-action" onclick="redirectToMenu()">Tornar al menú</button>
-    `;
-
-    finalScreen.style.display = "flex";
-}
-
 function playDictationAudio(btn) {
     if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); // Atura qualsevol àudio previ
-        currentUtterance = new SpeechSynthesisUtterance(currentItemData.text);
+        window.speechSynthesis.cancel();
+        // Utilitza el camp audioText per a la veu
+        const speechText = currentItemData.audioText || currentItemData.text;
+        currentUtterance = new SpeechSynthesisUtterance(speechText);
         currentUtterance.lang = "ca-ES";
 
         btn.textContent = "🔊 Reproduint...";
@@ -364,8 +303,9 @@ function playDictationAudio(btn) {
 
 function checkDictation() {
     const input = document.getElementById("dictationInput");
-    if (!input) return;
-
+    const wrapper = document.getElementById("dictationWrapper");
+    if (!input || !wrapper) return;
+    
     const userText = input.value.trim();
     const correctText = currentItemData.text.trim();
 
@@ -373,9 +313,9 @@ function checkDictation() {
     const correctWords = correctText.split(/\s+/);
 
     let correctMatches = 0;
-    let highlightedHTML = "";
+    let inlineCorrectionHTML = "";
 
-    // Comparació paraula a paraula
+    // Corregim directament l'error mostrant la paraula correcta
     correctWords.forEach((cWord, idx) => {
         const cleanC = cWord.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
         const uWord = userWords[idx] || "";
@@ -383,37 +323,105 @@ function checkDictation() {
 
         if (cleanU === cleanC) {
             correctMatches++;
-            highlightedHTML += `<span style="color: #2e7d32; font-weight: bold; margin-right: 5px;">${uWord || cWord}</span>`;
+            inlineCorrectionHTML += `<span class="word-correct">${uWord || cWord}</span> `;
         } else {
-            highlightedHTML += `<span style="color: #d32f2f; text-decoration: underline; font-weight: bold; margin-right: 5px;" title="Correcte: ${cWord}">${uWord || "(falta)"}</span>`;
+            // Si hi ha error, mostrem la paraula correcta corregida directament
+            inlineCorrectionHTML += `<span class="word-fixed" title="Has escrit: '${uWord || 'res'}'">${cWord}</span> `;
         }
     });
 
-    // Si l'usuari ha escrit paraules de més
-    if (userWords.length > correctWords.length) {
-        for (let i = correctWords.length; i < userWords.length; i++) {
-            highlightedHTML += `<span style="color: #d32f2f; text-decoration: line-through; margin-right: 5px;">${userWords[i]}</span>`;
-        }
-    }
-
-    // Càlcul exacte del percentatge basat en les paraules encertades sobre el total de la frase
     const totalWords = correctWords.length;
     const percentage = Math.round((correctMatches / totalWords) * 100);
-
-    // Considerem superat si el percentatge és del 70% o més (pots ajustar-ho si ho prefereixes)
     const isOk = percentage >= 70;
+
+    // Reemplaçament del camp d'escriptura per la frase totalment corregida
+    wrapper.innerHTML = `
+        <div class="writer-input correction-box">
+            ${inlineCorrectionHTML}
+        </div>
+    `;
 
     if (isOk) {
         sectionScores[0]++;
-        msg.innerHTML = `<div style="color:#2e7d32; font-weight:bold; margin-bottom:5px;">Molt bé! (${percentage}% d'encert: ${correctMatches}/${totalWords} paraules)</div><div>${highlightedHTML}</div>`;
+        msg.innerHTML = `<span style="color:#2e7d32; font-weight:bold;">Molt bé! (${percentage}% d'encert)</span>`;
     } else {
-        msg.innerHTML = `<div style="color:#d32f2f; font-weight:bold; margin-bottom:5px;">A millorar (${percentage}% d'encert). Frase correcta:</div><div style="font-style:italic; color:#444; margin-bottom:4px;">"${correctText}"</div><div>${highlightedHTML}</div>`;
+        msg.innerHTML = `<span style="color:#d32f2f; font-weight:bold;">${percentage}% d'encert. S'han corregit els errors marcats en lila.</span>`;
     }
 
     updateProgressCircle(isOk);
     questionInSectionIdx++;
     actionBtn.style.display = "none";
-    setTimeout(() => { next(); }, 3500);
+    setTimeout(() => { next(); }, 4000);
+}
+
+function checkSentenceOrder() {
+    const items = Array.from(targetZone.querySelectorAll('.drag-item'));
+    const userOrder = items.map(el => el.textContent).join(" ");
+    const isOk = (userOrder === currentItemData.ordreCorrecte);
+
+    if (isOk) {
+        sectionScores[1]++;
+        msg.innerHTML = `<span style="color:#2e7d32; font-weight:bold;">Molt bé! Frase correcta.</span>`;
+    } else {
+        msg.innerHTML = `<span style="color:#d32f2f; font-weight:bold;">Incorrecte. L'ordre era: "${currentItemData.ordreCorrecte}"</span>`;
+    }
+
+    updateProgressCircle(isOk);
+    questionInSectionIdx++;
+    actionBtn.style.display = "none";
+    setTimeout(() => { next(); }, 2500);
+}
+
+function checkWriting() {
+    const textArea = document.getElementById("writingInput");
+    if (!textArea) return;
+    
+    const text = textArea.value.trim().toLowerCase();
+    const words = text ? text.split(/\s+/) : [];
+    
+    const hasMinWords = words.length >= currentItemData.minParaules;
+    const matchedKeywords = currentItemData.keywords.filter(kw => text.includes(kw.toLowerCase()));
+    const hasEnoughKeywords = matchedKeywords.length >= 2;
+
+    if (!hasMinWords) {
+        msg.innerHTML = `<span style="color:#d32f2f; font-weight:bold;">El text no arriba al mínim de ${currentItemData.minParaules} paraules (n'has escrit ${words.length}).</span>`;
+        updateProgressCircle(false);
+    } else if (!hasEnoughKeywords) {
+        msg.innerHTML = `<span style="color:#d32f2f; font-weight:bold;">El text no sembla relacionat amb el tema. Inclou conceptes com: ${currentItemData.keywords.slice(0, 3).join(', ')}.</span>`;
+        updateProgressCircle(false);
+    } else {
+        sectionScores[2]++;
+        msg.innerHTML = `<span style="color:#2e7d32; font-weight:bold;">Molt bé! Redacció coherent i adequada.</span>`;
+        updateProgressCircle(true);
+    }
+
+    questionInSectionIdx++;
+    actionBtn.style.display = "none";
+    setTimeout(() => { next(); }, 3000);
+}
+
+function showFinalScreen(message, correct, total) {
+    const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+
+    let pctClass = "low";
+    if (pct >= 70) pctClass = "good";
+    else if (pct >= 40) pctClass = "mid";
+
+    const finalScreen = document.getElementById("finalScreen");
+
+    finalScreen.innerHTML = `
+        <div class="final-message">${message}</div>
+        <div class="final-percentage ${pctClass}">${pct}%</div>
+        <div class="final-fraction">${correct}/${total} encerts totals</div>
+        <div style="margin: 15px 0; font-size: 15px; color: #444; background: #f8f9fa; padding: 12px; border-radius: 8px;">
+            <div><strong>Secció 1 (Dictat):</strong> ${sectionScores[0]} / 10</div>
+            <div><strong>Secció 2 (Ordenar):</strong> ${sectionScores[1]} / 10</div>
+            <div><strong>Secció 3 (Redacció):</strong> ${sectionScores[2]} / 10</div>
+        </div>
+        <button class="btn-action" onclick="redirectToMenu()">Tornar al menú</button>
+    `;
+
+    finalScreen.style.display = "flex";
 }
 
 updateHeader();

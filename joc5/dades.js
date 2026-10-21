@@ -1,14 +1,14 @@
 const dictats = [
-    { text: "El gos petit corre pel parc verd." },
-    { text: "M'agrada molt menjar pizza de formatge." },
-    { text: "Demà farem una excursió a la muntanya." },
-    { text: "La professora explica la lliçó amb molta calma." },
-    { text: "Has tancat bé la porta de casa?" },
-    { text: "Aquest estiu anirem de vacances a la platja." },
-    { text: "Fa un dia fantàstic per passejar." },
-    { text: "Necessito comprar llet, pa i fruita." },
-    { text: "El cotxe vermell va anar molt ràpid." },
-    { text: "Estudiar cada dia ajuda a millorar." }
+    { text: "El gos petit corre pel parc verd.", audioText: "Al gos patit corra pal parc verd." },
+    { text: "M'agrada molt menjar pizza de formatge.", audioText: "Magrada mol manxar pitsa da formatge." },
+    { text: "Demà farem una excursió a la muntanya.", audioText: "Demà farem una excursió a la muntanya." },
+    { text: "La professora explica la lliçó amb molta calma.", audioText: "La professora explica la llisó amb molta calma." },
+    { text: "Has tancat bé la porta de casa?", audioText: "Has tancat bé la porta de casa?" },
+    { text: "Aquest estiu anirem de vacances a la platja.", audioText: "Aquest estiu anirem de vacances a la platcha." },
+    { text: "Fa un dia fantàstic per passejar.", audioText: "Fa un dia fantàstic per passexar." },
+    { text: "Necessito comprar llet, pa i fruita.", audioText: "Necessito comprar llet, pa i fruita." },
+    { text: "El cotxe vermell va anar molt ràpid.", audioText: "El cotxe vermell va anar molt ràpid." },
+    { text: "Estudiar cada dia ajuda a millorar.", audioText: "Estudiar cada dia axuda a millorar." }
 ];
 
 const frasesOrdenar = [
@@ -37,7 +37,7 @@ const situacionsRedaccio = [
         tipus: "carta", 
         icona: "✉️", 
         titol: "Carta d'agraïment", 
-        missatgeEntrant: "Estimat/da, et confeciono aquesta carta per fer-te arribar el meu sincer agraïment pel detall del teu regal d'aniversari.",
+        missatgeEntrant: "Estimat/da, et confecciono aquesta carta per fer-te arribar el meu sincer agraïment pel detall del teu regal d'aniversari.",
         minParaules: 12,
         keywords: ["gràcies", "regal", "aniversari", "estimat", "estimada", "molt", "m'ha agradat", "detall", "família"]
     },
