@@ -6,41 +6,320 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LanguageQuest | Aprèn i comunica't</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estils addicionals d'aquesta pàgina (no depenen del style.css) */
+        #descripcio { text-align: left; line-height: 1.6; }
+        #descripcio h2 { margin-top: 42px; }
+        #descripcio h3 { margin-top: 26px; }
+        .lead { font-size: 1.1rem; }
+        .toc { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 22px 0 6px; }
+        .toc a { text-decoration: none; color: var(--primary, #2563eb); background: #e8efff; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: .9rem; transition: .2s; }
+        .toc a:hover, .toc a:focus { background: var(--primary, #2563eb); color: #fff; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 18px 0; }
+        .feature { background: #fff; border-radius: 18px; padding: 18px 20px; box-shadow: 0 6px 20px rgba(0, 0, 0, .08); }
+        .feature .ico { font-size: 2rem; display: block; margin-bottom: 6px; }
+        .feature h4 { margin: 0 0 6px; font-size: 1.05rem; }
+        .feature p { margin: 0; font-size: .95rem; color: #374151; }
+        .steps { counter-reset: s; list-style: none; padding: 0; margin: 18px 0; display: grid; gap: 10px; }
+        .steps li { counter-increment: s; background: #fff; border-radius: 14px; padding: 12px 16px 12px 56px; position: relative; box-shadow: 0 4px 14px rgba(0, 0, 0, .06); }
+        .steps li::before { content: counter(s); position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; background: var(--primary, #2563eb); color: #fff; font-weight: bold; display: flex; align-items: center; justify-content: center; }
+        .game { background: #fff; border-radius: 22px; padding: 22px 26px; margin: 20px 0; box-shadow: 0 8px 25px rgba(0, 0, 0, .1); border-left: 8px solid var(--accent, #2563eb); }
+        .game h3 { margin: 0 0 4px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .game h3 .em { font-size: 2.2rem; }
+        .game .what { margin: 0 0 10px; color: #4b5563; font-style: italic; }
+        .game ul { margin: 8px 0 0; padding-left: 22px; }
+        .game li { margin: 4px 0; }
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
+        .chip { background: #eef2ff; color: #3730a3; border-radius: 14px; padding: 3px 12px; font-size: .82rem; font-weight: bold; }
+        .chip.soon { background: #fff3cd; color: #7a5b00; }
+        .reallife { --accent: #FFA000; background: linear-gradient(135deg, #fffaf0, #fff3d6); border-left-width: 8px; }
+        .reallife h3 { font-size: 1.5rem; }
+        .note { background: #fff8e1; border: 1px solid #ffd54f; border-left: 6px solid #ffa000; border-radius: 12px; padding: 14px 18px; margin: 22px 0; font-size: .95rem; }
+        .note.info { background: #eef6ff; border-color: #93c5fd; border-left-color: #2563eb; }
+        .twocol { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+        .btn-row { text-align: center; margin: 30px 0 10px; }
+    </style>
 </head>
 
 <body>
 
     <div class="container">
         <div class="logo">🌍</div>
-            <!-- Hem convertit el títol en un enllaç -->
-            <a href="../menu/index.html" class="title-link">
-                <h1>LanguageQuest</h1>
-            </a>
-            <p class="subtitle">Aprèn i comunica't jugant</p>
+        <a href="../menu/index.html" class="title-link">
+            <h1>LanguageQuest</h1>
+        </a>
+        <p class="subtitle">Aprèn i comunica't jugant</p>
+
+        <nav class="toc" aria-label="Índex de la pàgina">
+            <a href="#descripcio">Què és?</a>
+            <a href="#public">A qui va dirigit</a>
+            <a href="#metode">El mètode</a>
+            <a href="#jocs">Els jocs</a>
+            <a href="#reallife">Real Life</a>
+            <a href="#accessibilitat">Accessibilitat</a>
+            <a href="#resultats">Resultats</a>
+            <a href="#docents">Per a docents</a>
+            <a href="#tecnologia">Tecnologia i privadesa</a>
+        </nav>
 
         <section id="descripcio">
             <h2>Què és LanguageQuest?</h2>
-            <p>LanguageQuest és una plataforma de gamificació centrada en el desenvolupament de la <strong>competència
+            <p class="lead">LanguageQuest és una plataforma de gamificació centrada en el desenvolupament de la <strong>competència
                     pragmàtica</strong>. No només ensenyem paraules, sinó el <em>context social</em> per utilitzar-les
                 correctament.</p>
+            <p>Saber què vol dir «bon dia» és només el primer pas. El que fa que una conversa funcioni és saber <em>quan</em>
+                dir-ho, <em>a qui</em>, amb quin to, i què respondre si l'altra persona et contesta amb una pregunta.
+                LanguageQuest entrena aquest salt: del vocabulari a la comunicació real.</p>
+            <p>Ho fa amb <strong>cinc jocs de pràctica</strong>, cadascun centrat en una habilitat concreta, i amb
+                <strong>Real Life</strong>, un mode immersiu en 3D on totes les habilitats es combinen en situacions
+                quotidianes: anar a la cafeteria, demanar ajuda a la farmàcia, presentar-se el primer dia de feina...
+                Tot en un <strong>entorn segur</strong>: equivocar-se no té cap conseqüència, i cada error ve acompanyat
+                d'una explicació.</p>
 
-            <h3>A qui va dirigit?</h3>
+            <h2 id="public">A qui va dirigit?</h2>
             <div class="public-target">
                 <strong>1. Estudiants d'idiomes i persones nouvingudes:</strong> Ideal per perdre la por a l'error en
-                interaccions quotidianes en un entorn segur.
+                interaccions quotidianes en un entorn segur. Es treballen les converses que realment ens trobem al carrer, a
+                la botiga, a la feina o al metge, amb el to i el registre adequats a cada situació.
             </div>
             <div class="public-target">
                 <strong>2. Col·lectius amb NEE (Necessitats Educatives Especials):</strong> Disseny accessible, amb
-                suport visual i estructura predictible per a persones amb TEA o dificultats d'aprenentatge.
+                suport visual i estructura predictible per a persones amb TEA o dificultats d'aprenentatge. Tots els jocs
+                comparteixen la mateixa distribució i les mateixes pautes, així que no hi ha sorpreses: l'esforç es destina
+                a aprendre, no a entendre com funciona la pantalla.
             </div>
             <div class="public-target">
                 <strong>3. Rehabilitació cognitiva:</strong> Útil per exercitar la presa de decisions i la comunicació
-                en persones que es recuperen de lesions cerebrals o afàsies.
+                en persones que es recuperen de lesions cerebrals o afàsies. Les proves són breus, es poden repetir
+                tantes vegades com calgui, i les de parla es poden ometre sense cap penalització.
+            </div>
+            <div class="public-target">
+                <strong>4. Docents, logopedes i famílies:</strong> Persones que acompanyen l'aprenentatge i necessiten
+                un recurs flexible. El contingut és fàcil d'ampliar i adaptar a cada alumne (vegeu
+                <a href="#docents">Per a docents</a>).
             </div>
 
+            <h2 id="metode">El nostre mètode</h2>
             <p>El nostre mètode es basa en el <em>feedback</em> immediat, la segmentació del llenguatge
-                (<em>chunking</em>) i l'aprenentatge multimodal.</p>
-            <button class="btn-exit" onClick="window.location.href='../menu/index.html'">Tornar al menú</button>
+                (<em>chunking</em>) i l'aprenentatge multimodal. A més, tota la plataforma segueix sis principis:</p>
+            <div class="grid">
+                <div class="feature"><span class="ico">⚡</span>
+                    <h4>Feedback immediat</h4>
+                    <p>Cada resposta es valora al moment, amb color i amb una explicació: què havia de ser i per què. Els
+                        consells apareixen en un requadre a part, mai barrejats amb el text de la conversa.</p>
+                </div>
+                <div class="feature"><span class="ico">🧩</span>
+                    <h4>Segmentació (chunking)</h4>
+                    <p>El llenguatge es treballa en unitats petites: una tasca cada vegada, seccions de 10 preguntes i
+                        converses de pocs passos. Un indicador de progrés mostra sempre on ets.</p>
+                </div>
+                <div class="feature"><span class="ico">🎧</span>
+                    <h4>Aprenentatge multimodal</h4>
+                    <p>Pictogrames per veure, veu sintetitzada per escoltar, reconeixement de veu per parlar i
+                        teclat o pantalla tàctil per escriure i triar. Cada persona pot recolzar-se en el canal que li va
+                        millor.</p>
+                </div>
+                <div class="feature"><span class="ico">🗺️</span>
+                    <h4>Estructura predictible</h4>
+                    <p>Els jocs comparteixen disseny, colors, botons i pantalla final. Saber què passarà redueix l'ansietat i
+                        deixa tota l'energia per a la comunicació.</p>
+                </div>
+                <div class="feature"><span class="ico">💛</span>
+                    <h4>L'error no es castiga</h4>
+                    <p>No hi ha punts que es perden ni temps que s'acaba. El resultat és un percentatge d'encerts que
+                        només serveix per veure l'evolució, i els errors són una oportunitat per aprendre.</p>
+                </div>
+                <div class="feature"><span class="ico">🔀</span>
+                    <h4>Varietat i repetició</h4>
+                    <p>Les preguntes, les escenes i l'ordre de les respostes es barregen a l'atzar a cada partida. Es pot
+                        repetir moltes vegades sense memoritzar la solució.</p>
+                </div>
+            </div>
+
+            <h2>Un camí d'aprenentatge suggerit</h2>
+            <p>Es pot jugar en l'ordre que es vulgui, però els jocs estan pensats per formar una progressió natural:</p>
+            <ol class="steps">
+                <li><strong>Pictomatcher:</strong> connectar paraules i imatges, i construir frases.</li>
+                <li><strong>Moodfinder:</strong> reconèixer emocions i decidir com reaccionar.</li>
+                <li><strong>Dialogues:</strong> triar la resposta adequada dins d'una conversa.</li>
+                <li><strong>Talker:</strong> dir les paraules i les frases en veu alta.</li>
+                <li><strong>Writter:</strong> escriure frases i petits textos.</li>
+                <li><strong>Real Life:</strong> posar-ho tot en pràctica a la vegada, en situacions que s'assemblen a la vida real.</li>
+            </ol>
+
+            <h2 id="jocs">Els jocs de pràctica</h2>
+
+            <article class="game" style="--accent:#2196F3">
+                <h3><span class="em">🖼️</span> Pictomatcher</h3>
+                <p class="what">Relaciona pictogrames amb paraules.</p>
+                <p>Treballa el <strong>vocabulari</strong> i l'<strong>estructura de la frase</strong> a partir de la
+                    imatge. Consta de tres seccions de 10 preguntes:</p>
+                <ul>
+                    <li><strong>Relacionar paraules i pictogrames:</strong> s'arrossega el pictograma correcte cap a la paraula, o la paraula cap al pictograma.</li>
+                    <li><strong>Construir frases complexes:</strong> es tradueix una frase ordenant els pictogrames que la formen.</li>
+                    <li><strong>Situacions i contexts diaris:</strong> davant d'una situació, es tria el pictograma que correspon.</li>
+                </ul>
+                <div class="chips"><span class="chip">Vocabulari</span><span class="chip">Sintaxi</span><span class="chip">Arrossegar i deixar anar (també amb tàctil)</span></div>
+            </article>
+
+            <article class="game" style="--accent:#FF9800">
+                <h3><span class="em">😄</span> Moodfinder</h3>
+                <p class="what">Relaciona emocions i aprèn a reaccionar en diverses situacions.</p>
+                <p>Desenvolupa la <strong>intel·ligència emocional</strong>: reconèixer què sent algú i saber com respondre.
+                    Té tres seccions de 10 preguntes:</p>
+                <ul>
+                    <li><strong>Relacionar emojis i paraules:</strong> es connecta cada cara amb el nom de l'emoció, en les dues direccions.</li>
+                    <li><strong>Com se sent en cada situació?:</strong> es llegeix una situació breu i s'indica quina emoció provoca.</li>
+                    <li><strong>Com reacciones?:</strong> es tria una resposta i es descobreix el desenllaç, com en una petita historieta amb finals diferents.</li>
+                </ul>
+                <div class="chips"><span class="chip">Emocions</span><span class="chip">Empatia</span><span class="chip">Causa i conseqüència</span></div>
+            </article>
+
+            <article class="game" style="--accent:#7c3aed">
+                <h3><span class="em">🗣️</span> Dialogues</h3>
+                <p class="what">Parla amb altres personatges en diferents escenes i selecciona la resposta adequada.</p>
+                <p>Entrena la <strong>competència pragmàtica</strong>: el que es diu, i com es diu, a cada situació.</p>
+                <ul>
+                    <li><strong>Escenes quotidianes:</strong> la cafeteria, demanar indicacions pel carrer, anar de compres, presentar-se, anar al metge i a la farmàcia.</li>
+                    <li><strong>Converses amb ramificacions:</strong> les respostes porten a camins diferents. Una resposta poc adequada fa fracassar el diàleg, i s'explica per què.</li>
+                    <li><strong>Veus i bafarades:</strong> cada personatge parla amb la seva pròpia veu i es pot repetir l'àudio tantes vegades com es vulgui.</li>
+                    <li><strong>Consells a part:</strong> les pistes sobre educació i registre surten en un requadre separat de la conversa.</li>
+                </ul>
+                <div class="chips"><span class="chip">Pragmàtica</span><span class="chip">Cortesia i registre</span><span class="chip">Comprensió oral</span></div>
+            </article>
+
+            <article class="game" style="--accent:#e53935">
+                <h3><span class="em">🎙️</span> Talker</h3>
+                <p class="what">Practica la pronunciació parlant en veu alta amb el micròfon.</p>
+                <p>Posa la <strong>veu</strong> al centre: el joc escolta el que es diu i comprova si coincideix. Tres seccions:</p>
+                <ul>
+                    <li><strong>Pronuncia les paraules (10):</strong> es mostra una paraula i cal dir-la en veu alta; es dona per bona tan bon punt es reconeix.</li>
+                    <li><strong>Respon en veu alta (10):</strong> davant d'una pregunta breu, es tria una de les cinc respostes i es diu en veu alta. Compta que la resposta sigui adequada i que s'hagi dit clarament.</li>
+                    <li><strong>Expressa't lliurement (2):</strong> respostes orals obertes, com una presentació personal o una entrevista de feina.</li>
+                </ul>
+                <div class="chips"><span class="chip">Pronunciació</span><span class="chip">Expressió oral</span><span class="chip">Reconeixement de veu</span></div>
+            </article>
+
+            <article class="game" style="--accent:#43a047">
+                <h3><span class="em">✍️</span> Writter <span class="chip soon">En desenvolupament</span></h3>
+                <p class="what">Practica l'escriptura completant frases i petits textos.</p>
+                <p>Serà el joc dedicat a l'<strong>expressió escrita</strong>. Mentrestant, l'escriptura ja es pot treballar
+                    dins de <a href="#reallife">Real Life</a>, amb proves d'escriure una carta, un missatge de mòbil o un correu
+                    electrònic i un corrector que revisa les faltes i l'estructura del text.</p>
+                <div class="chips"><span class="chip">Ortografia</span><span class="chip">Redacció</span><span class="chip">Registre escrit</span></div>
+            </article>
+
+            <h2 id="reallife">Real Life: l'aprenentatge, dins de la vida real</h2>
+            <article class="game reallife">
+                <h3><span class="em">🎯</span> Real Life <span class="chip">Mode principal</span></h3>
+                <p class="what">Posa a prova tot el que has après en situacions de la vida real.</p>
+                <p>Els cinc jocs de pràctica són l'entrenament; <strong>Real Life és el partit</strong>. En lloc de fer
+                    exercicis separats, la persona s'endinsa en un món en 3D i viu una història. La càmera avança sola,
+                    sense que calgui moure's ni conduir res, i en cada parada hi ha un personatge que parla i proposa una prova.</p>
+                <h4>Com és l'experiència?</h4>
+                <ul>
+                    <li><strong>Escenaris amb capítols:</strong> per exemple, <em>Un dia al barri</em> (26 proves: carrer, forn, cafeteria, farmàcia i parc) i <em>El primer dia de feina</em> (24 proves: autobús, recepció, oficina i reunió).</li>
+                    <li><strong>Personatges 3D amb expressions:</strong> la cara del personatge mostra l'emoció, de manera que la pregunta «com es sent?» es respon mirant-lo, com en una situació real. També reaccionen amb gestos quan s'encerta o s'erra.</li>
+                    <li><strong>Mons que respiren:</strong> carrers amb vianants i cotxes, una cafeteria amb vapor i veus de fons, un parc amb ànecs i ocells, una oficina amb companys. Hi ha so ambient que es crea sobre la marxa.</li>
+                    <li><strong>Pictogrames dins del món:</strong> els pictogrames i les paraules flotants apareixen a l'escena, junt al personatge.</li>
+                    <li><strong>Veus i bafarades:</strong> els personatges parlen amb veu pròpia i es pot repetir l'àudio.</li>
+                </ul>
+                <h4>Quines proves combina?</h4>
+                <ul>
+                    <li>🖼️ <strong>Vocabulari:</strong> relacionar pictogrames i paraules, i construir frases (Pictomatcher).</li>
+                    <li>😄 <strong>Emocions i reaccions:</strong> reconèixer l'emoció d'un personatge i decidir com actuar (Moodfinder).</li>
+                    <li>🗣️ <strong>Converses:</strong> triar què dir en cada moment (Dialogues).</li>
+                    <li>🎤 <strong>Parla:</strong> dir frases i respondre oralment, amb l'opció d'ometre la prova sense penalització (Talker).</li>
+                    <li>✍️ <strong>Escriptura:</strong> redactar en una situació real: un missatge en un <em>mòbil</em> de pantalla, una <em>carta</em> en un full de paper o un <em>correu</em> en un ordinador. S'avalua l'ortografia, l'estructura i els objectius de la tasca.</li>
+                </ul>
+                <h4>Què motiva a continuar?</h4>
+                <ul>
+                    <li>Una barra de progrés amb un indicador per a cada prova, i ratxes d'encerts consecutius.</li>
+                    <li>Al final de cada escenari: percentatge d'encerts, estrelles, el millor resultat guardat i una gràfica per habilitats (vocabulari, emocions, converses, parla i escriptura).</li>
+                    <li>Una interfície mínima i discreta: l'escenari ocupa tota la pantalla, i el títol, el progrés i el botó de sortida es queden a un racó.</li>
+                </ul>
+                <div class="chips"><span class="chip">Immersiu</span><span class="chip">Multihabilitat</span><span class="chip">Escenaris ampliables</span></div>
+            </article>
+
+            <h2 id="accessibilitat">Accessibilitat i disseny inclusiu</h2>
+            <div class="grid">
+                <div class="feature"><span class="ico">⌨️</span>
+                    <h4>Navegació per teclat</h4>
+                    <p>El menú es pot recórrer amb les fletxes i Enter, i hi ha un mode d'accessibilitat amb locució d'àudio dels elements. A Real Life, les respostes es trien amb les tecles numèriques.</p>
+                </div>
+                <div class="feature"><span class="ico">👁️</span>
+                    <h4>Suport visual constant</h4>
+                    <p>Pictogrames, colors amb significat (verd per a l'encert, taronja i vermell per a la revisió) i botons grans i ben separats.</p>
+                </div>
+                <div class="feature"><span class="ico">🔊</span>
+                    <h4>Text i veu</h4>
+                    <p>El que diuen els personatges es pot llegir i escoltar. La velocitat de lectura és moderada i es pot repetir.</p>
+                </div>
+                <div class="feature"><span class="ico">🤝</span>
+                    <h4>Sense pressió</h4>
+                    <p>Cap cronòmetre, cap resta de punts. Les proves de parla es poden ometre, i si el micròfon no detecta res es pot tornar a intentar sense comptar-ho com a error.</p>
+                </div>
+                <div class="feature"><span class="ico">🎞️</span>
+                    <h4>Moviment suau</h4>
+                    <p>Les animacions són lentes i respecten la preferència del sistema per reduir el moviment. Es pot silenciar el so en qualsevol moment.</p>
+                </div>
+                <div class="feature"><span class="ico">📱</span>
+                    <h4>Adaptable</h4>
+                    <p>Les pantalles s'adapten a ordinadors, tauletes i mòbils, i els jocs d'arrossegar funcionen també amb el dit.</p>
+                </div>
+            </div>
+
+            <h2 id="resultats">Seguiment dels resultats</h2>
+            <p>Tots els jocs acaben amb la mateixa pantalla final, perquè sigui fàcil de reconèixer i d'interpretar:</p>
+            <ul>
+                <li>Un <strong>percentatge d'encerts</strong> gran i amb colors (verd, taronja o vermell, segons el resultat).</li>
+                <li>A sota, en petit, la <strong>fracció d'encerts</strong> (per exemple, «17/22 encerts»).</li>
+                <li>Un botó per <strong>tornar al menú</strong>.</li>
+            </ul>
+            <p>A Real Life s'hi afegeixen les estrelles, el millor resultat guardat al dispositiu i el desglossament per
+                habilitats, que permet veure d'una ullada què es domina i en què cal practicar més. Això fa que sigui un
+                recurs útil per a la conversa entre l'alumne i el seu docent, logopeda o família.</p>
+
+            <h2 id="docents">Per a docents, logopedes i famílies</h2>
+            <p>Tot el contingut viu en fitxers de dades separats del codi, de manera que es pot adaptar sense haver de ser
+                programador:</p>
+            <ul>
+                <li><strong>Cada joc té el seu fitxer de dades</strong> (<code>dades.js</code>), amb les paraules, situacions, converses i desenllaços. Per afegir-ne de nous només cal seguir el format dels que ja hi són.</li>
+                <li><strong>Real Life té la seva base de dades</strong> d'escenaris, personatges i proves, amb un petit manual a la capçalera i una validació que avisa si alguna cosa no quadra.</li>
+                <li><strong>Es poden crear escenaris a mida:</strong> per exemple, la ruta que fa un alumne cada dia, o la visita a un centre concret.</li>
+                <li><strong>Els objectius de les proves d'escriptura</strong> es poden definir amb paraules clau, perquè el corrector comprovi si el text els compleix.</li>
+            </ul>
+
+            <h2 id="tecnologia">Tecnologia, privadesa i requisits</h2>
+            <div class="twocol">
+                <div class="feature">
+                    <h4>🛠️ Com està fet</h4>
+                    <p>És una aplicació web en HTML, CSS i JavaScript: no cal instal·lar res ni crear un compte. El mode 3D de Real Life fa servir la llibreria <em>three.js</em>, i el so i les veus utilitzen les capacitats del navegador.</p>
+                </div>
+                <div class="feature">
+                    <h4>🔒 Privadesa</h4>
+                    <p>LanguageQuest no recull ni desa dades personals ni gravacions. Els resultats guardats es queden només al dispositiu. La correcció dels textos escrits es fa al mateix navegador, sense enviar el text enlloc.</p>
+                </div>
+                <div class="feature">
+                    <h4>🎤 Veu</h4>
+                    <p>El reconeixement de veu l'executa el navegador. A Google Chrome, l'àudio s'envia al servei de veu de Google per transcriure'l, i LanguageQuest no el desa. Les proves de parla funcionen millor amb Chrome.</p>
+                </div>
+                <div class="feature">
+                    <h4>🌐 Requisits</h4>
+                    <p>Un navegador actual i connexió a internet (per carregar el motor 3D i el reconeixement de veu). El contingut és ara en català, però l'estructura es pot adaptar a altres idiomes.</p>
+                </div>
+            </div>
+
+            <div class="note">
+                <strong>Una nota important:</strong> LanguageQuest és un recurs educatiu i de pràctica complementària.
+                No és un producte sanitari ni substitueix l'avaluació, el diagnòstic o la intervenció d'un professional
+                (logopeda, neuropsicòleg, docent d'educació especial...). En l'àmbit de la rehabilitació, es recomana
+                utilitzar-lo sempre sota la supervisió i les pautes del professional de referència.
+            </div>
+
+            <div class="btn-row">
+                <button class="btn-exit" onClick="window.location.href='../menu/index.html'">Tornar al menú</button>
+            </div>
         </section>
 
     </div>
