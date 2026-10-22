@@ -114,7 +114,8 @@ h1 {
     text-decoration: none;
     color: inherit;
     display: inline-block;
-    transition: transform 0.3s ease; /* Suavitzat de l'animació */
+    transition: transform 0.3s ease;
+    /* Suavitzat de l'animació */
 }
 
 .title-link:hover {
@@ -123,4 +124,206 @@ h1 {
 
 .title-link h1 {
     margin: 0;
+}
+
+#descripcio {
+    text-align: left;
+    line-height: 1.6;
+}
+
+#descripcio h2 {
+    margin-top: 42px;
+}
+
+#descripcio h3 {
+    margin-top: 26px;
+}
+
+.lead {
+    font-size: 1.1rem;
+}
+
+.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 22px 0 6px;
+}
+
+.toc a {
+    text-decoration: none;
+    color: var(--primary, #2563eb);
+    background: #e8efff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: .9rem;
+    transition: .2s;
+}
+
+.toc a:hover,
+.toc a:focus {
+    background: var(--primary, #2563eb);
+    color: #fff;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 18px 0;
+}
+
+.feature {
+    background: #fff;
+    border-radius: 18px;
+    padding: 18px 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .08);
+}
+
+.feature .ico {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.feature h4 {
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+}
+
+.feature p {
+    margin: 0;
+    font-size: .95rem;
+    color: #374151;
+}
+
+.steps {
+    counter-reset: s;
+    list-style: none;
+    padding: 0;
+    margin: 18px 0;
+    display: grid;
+    gap: 10px;
+}
+
+.steps li {
+    counter-increment: s;
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px 16px 12px 56px;
+    position: relative;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+}
+
+.steps li::before {
+    content: counter(s);
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--primary, #2563eb);
+    color: #fff;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.game {
+    background: #fff;
+    border-radius: 22px;
+    padding: 22px 26px;
+    margin: 20px 0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .1);
+    border-left: 8px solid var(--accent, #2563eb);
+}
+
+.game h3 {
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.game h3 .em {
+    font-size: 2.2rem;
+}
+
+.game .what {
+    margin: 0 0 10px;
+    color: #4b5563;
+    font-style: italic;
+}
+
+.game ul {
+    margin: 8px 0 0;
+    padding-left: 22px;
+}
+
+.game li {
+    margin: 4px 0;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0 0;
+}
+
+.chip {
+    background: #eef2ff;
+    color: #3730a3;
+    border-radius: 14px;
+    padding: 3px 12px;
+    font-size: .82rem;
+    font-weight: bold;
+}
+
+.chip.soon {
+    background: #fff3cd;
+    color: #7a5b00;
+}
+
+.reallife {
+    --accent: #FFA000;
+    background: linear-gradient(135deg, #fffaf0, #fff3d6);
+    border-left-width: 8px;
+}
+
+.reallife h3 {
+    font-size: 1.5rem;
+}
+
+.note {
+    background: #fff8e1;
+    border: 1px solid #ffd54f;
+    border-left: 6px solid #ffa000;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 22px 0;
+    font-size: .95rem;
+}
+
+.note.info {
+    background: #eef6ff;
+    border-color: #93c5fd;
+    border-left-color: #2563eb;
+}
+
+.twocol {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.btn-row {
+    text-align: center;
+    margin: 30px 0 10px;
 }

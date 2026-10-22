@@ -6,39 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LanguageQuest | Aprèn i comunica't</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Estils addicionals d'aquesta pàgina (no depenen del style.css) */
-        #descripcio { text-align: left; line-height: 1.6; }
-        #descripcio h2 { margin-top: 42px; }
-        #descripcio h3 { margin-top: 26px; }
-        .lead { font-size: 1.1rem; }
-        .toc { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 22px 0 6px; }
-        .toc a { text-decoration: none; color: var(--primary, #2563eb); background: #e8efff; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: .9rem; transition: .2s; }
-        .toc a:hover, .toc a:focus { background: var(--primary, #2563eb); color: #fff; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 18px 0; }
-        .feature { background: #fff; border-radius: 18px; padding: 18px 20px; box-shadow: 0 6px 20px rgba(0, 0, 0, .08); }
-        .feature .ico { font-size: 2rem; display: block; margin-bottom: 6px; }
-        .feature h4 { margin: 0 0 6px; font-size: 1.05rem; }
-        .feature p { margin: 0; font-size: .95rem; color: #374151; }
-        .steps { counter-reset: s; list-style: none; padding: 0; margin: 18px 0; display: grid; gap: 10px; }
-        .steps li { counter-increment: s; background: #fff; border-radius: 14px; padding: 12px 16px 12px 56px; position: relative; box-shadow: 0 4px 14px rgba(0, 0, 0, .06); }
-        .steps li::before { content: counter(s); position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; background: var(--primary, #2563eb); color: #fff; font-weight: bold; display: flex; align-items: center; justify-content: center; }
-        .game { background: #fff; border-radius: 22px; padding: 22px 26px; margin: 20px 0; box-shadow: 0 8px 25px rgba(0, 0, 0, .1); border-left: 8px solid var(--accent, #2563eb); }
-        .game h3 { margin: 0 0 4px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .game h3 .em { font-size: 2.2rem; }
-        .game .what { margin: 0 0 10px; color: #4b5563; font-style: italic; }
-        .game ul { margin: 8px 0 0; padding-left: 22px; }
-        .game li { margin: 4px 0; }
-        .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 0; }
-        .chip { background: #eef2ff; color: #3730a3; border-radius: 14px; padding: 3px 12px; font-size: .82rem; font-weight: bold; }
-        .chip.soon { background: #fff3cd; color: #7a5b00; }
-        .reallife { --accent: #FFA000; background: linear-gradient(135deg, #fffaf0, #fff3d6); border-left-width: 8px; }
-        .reallife h3 { font-size: 1.5rem; }
-        .note { background: #fff8e1; border: 1px solid #ffd54f; border-left: 6px solid #ffa000; border-radius: 12px; padding: 14px 18px; margin: 22px 0; font-size: .95rem; }
-        .note.info { background: #eef6ff; border-color: #93c5fd; border-left-color: #2563eb; }
-        .twocol { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-        .btn-row { text-align: center; margin: 30px 0 10px; }
-    </style>
 </head>
 
 <body>
@@ -60,6 +27,7 @@
             <a href="#resultats">Resultats</a>
             <a href="#docents">Per a docents</a>
             <a href="#tecnologia">Tecnologia i privadesa</a>
+            <a href="#crèdits">Crèdits</a>
         </nav>
 
         <section id="descripcio">
@@ -143,7 +111,7 @@
                 <li><strong>Moodfinder:</strong> reconèixer emocions i decidir com reaccionar.</li>
                 <li><strong>Dialogues:</strong> triar la resposta adequada dins d'una conversa.</li>
                 <li><strong>Talker:</strong> dir les paraules i les frases en veu alta.</li>
-                <li><strong>Writter:</strong> escriure frases i petits textos.</li>
+                <li><strong>Writer:</strong> escriure frases i petits textos.</li>
                 <li><strong>Real Life:</strong> posar-ho tot en pràctica a la vegada, en situacions que s'assemblen a la vida real.</li>
             </ol>
 
@@ -201,7 +169,7 @@
             </article>
 
             <article class="game" style="--accent:#43a047">
-                <h3><span class="em">✍️</span> Writter <span class="chip soon">En desenvolupament</span></h3>
+                <h3><span class="em">✍️</span> Writer <span class="chip soon">En desenvolupament</span></h3>
                 <p class="what">Practica l'escriptura completant frases i petits textos.</p>
                 <p>Serà el joc dedicat a l'<strong>expressió escrita</strong>. Mentrestant, l'escriptura ja es pot treballar
                     dins de <a href="#reallife">Real Life</a>, amb proves d'escriure una carta, un missatge de mòbil o un correu
@@ -211,7 +179,7 @@
 
             <h2 id="reallife">Real Life: l'aprenentatge, dins de la vida real</h2>
             <article class="game reallife">
-                <h3><span class="em">🎯</span> Real Life <span class="chip">Mode principal</span></h3>
+                <h3><span class="em">🎯</span> Real Life <span class="chip">Mode principal</span> <span class="chip soon">En desenvolupament</span> </h3>
                 <p class="what">Posa a prova tot el que has après en situacions de la vida real.</p>
                 <p>Els cinc jocs de pràctica són l'entrenament; <strong>Real Life és el partit</strong>. En lloc de fer
                     exercicis separats, la persona s'endinsa en un món en 3D i viu una història. La càmera avança sola,
@@ -316,6 +284,36 @@
                 (logopeda, neuropsicòleg, docent d'educació especial...). En l'àmbit de la rehabilitació, es recomana
                 utilitzar-lo sempre sota la supervisió i les pautes del professional de referència.
             </div>
+
+            <h2 id="crèdits">Crèdits</h2>
+
+            <p>LanguageQuest ha estat desenvolupat per <b>Sergi Ventosa</b> i <b>Pol Vivancos</b>, millorat a partir de 
+                la primera versió creada a la Hackathon "Hack The Future" celebrada a Sabadell el dia 13 de juny 
+                de l'any 2026 i organitzada per Deq4Future i Codelearn.</p>
+
+            <article class="game" style="--accent:#999a9b">
+                <strong>MIT License:</strong> 
+
+                <p>Copyright (c) 2026 Seveorr</p>
+
+                <p>Permission is hereby granted, free of charge, to any person obtaining a copy
+                of this software and associated documentation files (the "Software"), to deal
+                in the Software without restriction, including without limitation the rights
+                to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+                copies of the Software, and to permit persons to whom the Software is
+                furnished to do so, subject to the following conditions:</p>
+
+                <p>The above copyright notice and this permission notice shall be included in all
+                copies or substantial portions of the Software.</p>
+
+                <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+                IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+                FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+                AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+                OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+                SOFTWARE.</p>
+            </article>
 
             <div class="btn-row">
                 <button class="btn-exit" onClick="window.location.href='../menu/index.html'">Tornar al menú</button>
