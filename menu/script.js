@@ -46,9 +46,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. Listeners ---
     welcomeCards.forEach(card => {
+        // Quan rep el focus (per teclat)
         card.addEventListener('focus', () => {
             if (!isWelcomePlaying && document.activeElement === card) {
                 safePlay(card.getAttribute('data-audio'));
+            }
+        });
+
+        // Nou: Permetre clicar directament amb el ratolí
+        card.addEventListener('click', () => {
+            welcome.style.display = 'none';
+            sessionStorage.setItem('ja_vist', 'true');
+            localStorage.setItem('accessibility', card.id === 'acc-yes' ? 'true' : 'false');
+            if (localStorage.getItem('accessibility') === 'true') {
+                activarAccessibilitat();
             }
         });
     });
@@ -76,32 +87,43 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- Funció d'Accessibilitat ---
+// --- Funció d'Accessibilitat ---
 function activarAccessibilitat() {
-    const selectors = ['.title-link', 'a[href*="joc1"]', 'a[href*="joc2"]', 'a[href*="joc3"]', '#btn-accessibility'];
+    const selectors = ['.title-link', 'a[href*="joc1"]', 'a[href*="joc2"]', 'a[href*="joc3"]', 'a[href*="joc4"]', 'a[href*="joc5"]', '#btn-reallife', '#btn-accessibility'];
     const elements = selectors.map(s => document.querySelector(s)).filter(e => e !== null);
-    let index = 0;
+    
+    // Comencem a -1 perquè cap element estigui seleccionat d'inici
+    let index = -1;
 
-    if (elements.length > 0) {
-        elements[index].focus();
-        // Aquest àudio sonaria en entrar al menú principal
-        if (typeof playAudio === 'function') {
-            playAudio('menú-principal', () => {
-                playAudio(elements[index].getAttribute('data-audio'));
-            });
-        }
-    }
-
-    // ... (Resta dels listeners igual que abans)
-    document.addEventListener('keydown', (e) => {
+    const handleMenuKeydown = (e) => {
         if (document.getElementById('welcome-screen').style.display !== 'none') return;
+        
         if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-            index = (e.key === 'ArrowRight') ? index + 1 : index - 1;
-            if (index < 0) index = elements.length - 1;
-            if (index >= elements.length) index = 0;
+            // Si és el primer cop que prem una fletxa, anem directament al primer element (0)
+            if (index === -1) {
+                index = 0;
+            } else {
+                // Si ja hi havia un element seleccionat, movem segons la fletxa
+                if (e.key === 'ArrowRight') {
+                    index = (index + 1) % elements.length;
+                } else {
+                    index = (index - 1 + elements.length) % elements.length;
+                }
+            }
+
             elements[index].focus();
-            playAudio(elements[index].getAttribute('data-audio'));
+            
+            if (typeof playAudio === 'function') {
+                playAudio(elements[index].getAttribute('data-audio'));
+            }
         } else if (e.key === 'Enter') {
-            elements[index].click();
+            if (index !== -1) {
+                elements[index].click();
+            }
         }
-    });
+    };
+
+    // Netegem i afegim el listener per evitar duplicitats
+    document.removeEventListener('keydown', handleMenuKeydown);
+    document.addEventListener('keydown', handleMenuKeydown);
 }

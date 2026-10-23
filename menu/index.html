@@ -13,14 +13,16 @@
 <body>
 
     <div id="welcome-screen" class="welcome-overlay" style="display: none;">
-        <div class="welcome-content game-card">
+        <div class="welcome-content game-card" style="pointer-events: none;"> <!-- Evita que el fons reaccioni al ratolí -->
             <h1>Benvingut a LanguageQuest!</h1>
-            <p>Utilitza les fletxes ⬅️ ➡️ per triar i prem ENTER:</p>
-            <div class="welcome-options">
+            <p>Utilitza les fletxes ⬅️ ➡️ per triar i prem ENTER (o fes clic amb el ratolí):</p>
+            <div class="welcome-options" style="pointer-events: auto;"> <!-- Torna a habilitar el ratolí només pels botons -->
                 <div id="acc-yes" class="game-card" tabindex="0" data-audio="ambaccessibilitat">
+                    <div class="game-icon" aria-hidden="true">✅</div>
                     <h3>Amb Accessibilitat</h3>
                 </div>
                 <div id="acc-no" class="game-card" tabindex="0" data-audio="senseaccessibilitat">
+                    <div class="game-icon" aria-hidden="true">❌</div>
                     <h3>Sense Accessibilitat</h3>
                 </div>
             </div>

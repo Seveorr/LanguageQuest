@@ -1,14 +1,14 @@
 const dictats = [
-    { text: "El gos petit corre pel parc verd.", audioText: "Al gos patit corra pal parc verd." },
-    { text: "M'agrada molt menjar pizza de formatge.", audioText: "Magrada mol manxar pitsa da formatge." },
+    { text: "El gos petit corre pel parc verd.", audioText: "El gos petit corre pel parc verd." },
+    { text: "M'agrada molt menjar pizza de formatge.", audioText: "Magrada mol manshar pitsa da formatge." },
     { text: "Demà farem una excursió a la muntanya.", audioText: "Demà farem una excursió a la muntanya." },
     { text: "La professora explica la lliçó amb molta calma.", audioText: "La professora explica la llisó amb molta calma." },
     { text: "Has tancat bé la porta de casa?", audioText: "Has tancat bé la porta de casa?" },
     { text: "Aquest estiu anirem de vacances a la platja.", audioText: "Aquest estiu anirem de vacances a la platcha." },
-    { text: "Fa un dia fantàstic per passejar.", audioText: "Fa un dia fantàstic per passexar." },
+    { text: "Fa un dia fantàstic per passejar.", audioText: "Fa un dia fantàstic per passeshar." },
     { text: "Necessito comprar llet, pa i fruita.", audioText: "Necessito comprar llet, pa i fruita." },
     { text: "El cotxe vermell va anar molt ràpid.", audioText: "El cotxe vermell va anar molt ràpid." },
-    { text: "Estudiar cada dia ajuda a millorar.", audioText: "Estudiar cada dia axuda a millorar." }
+    { text: "Estudiar cada dia ajuda a millorar.", audioText: "Estudiar cada dia ashuda a millorar." }
 ];
 
 const frasesOrdenar = [
