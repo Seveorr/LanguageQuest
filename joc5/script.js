@@ -141,7 +141,7 @@ function next() {
         if (shuffledFrases.length === 0) shuffledFrases = shuffleArray(frasesOrdenar);
         currentItemData = shuffledFrases[(questionInSectionIdx - 1) % shuffledFrases.length];
 
-        question.textContent = "Ordena les paraules per construir una oració correcta:";
+        question.textContent = "Ordena totes les paraules per construir una oració correcta:";
 
         const scrambled = shuffleArray(currentItemData.paraules);
 
