@@ -7,7 +7,7 @@
 (function () {
     'use strict';
 
-    const MENU_URL = '../menu/index.html';     // ← canvia-ho si el teu menú és en una altra ruta
+    const MENU_URL = '../index.html';     // ← canvia-ho si el teu menú és en una altra ruta
 
     const $ = id => document.getElementById(id);
     const sleep = ms => new Promise(r => setTimeout(r, ms));
