@@ -36,7 +36,7 @@ const modal = document.getElementById("exitModal");
 
 function showExitModal() { modal.classList.add("active"); }
 function hideExitModal() { modal.classList.remove("active"); }
-function redirectToMenu() { window.location.href = "../menu/index.html"; }
+function redirectToMenu() { window.location.href = "../index.html"; }
 
 // ============================================
 // LATERAL DE PROGRÉS (cercles numerats, no interactius)

@@ -43,7 +43,7 @@ const actionBtn = document.getElementById("actionBtn");
 
 function showExitModal() { modal.classList.add("active"); }
 function hideExitModal() { modal.classList.remove("active"); }
-function redirectToMenu() { window.location.href = "../menu/index.html"; }
+function redirectToMenu() { window.location.href = "../index.html"; }
 
 function updateProgressCircle(isCorrect) {
     const circle = document.getElementById(`c${questionInSectionIdx}`);
