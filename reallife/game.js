@@ -7,7 +7,8 @@
 (function () {
     'use strict';
 
-    const MENU_URL = '../index.html';     // ← canvia-ho si el teu menú és en una altra ruta
+    const MENU_URL = '../index.html';
+    const subMENU_URL = 'index.html';
 
     const $ = id => document.getElementById(id);
     const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -595,7 +596,7 @@
     function wireUI() {
         $('btnExit').onclick = () => $('exitModal').classList.add('open');
         $('btnExitNo').onclick = () => $('exitModal').classList.remove('open');
-        $('btnExitYes').onclick = () => { window.location.href = MENU_URL; };
+        $('btnExitYes').onclick = () => { window.location.href = subMENU_URL; };
         $('menuBack').onclick = () => { window.location.href = MENU_URL; };
         $('btnMenu').onclick = () => { window.location.href = MENU_URL; };
         $('errMenu').onclick = () => { window.location.href = MENU_URL; };
